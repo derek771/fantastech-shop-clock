@@ -174,6 +174,10 @@ table.tight{min-width:0}
 .pickbar b{font-size:12.5px;font-weight:700;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
 .tchip.picked{background:var(--go);color:var(--go-ink)}
 .tchip.dup{background:var(--alert-bg);color:var(--alert);border:1px solid var(--alert-line)}
+/* An order somebody took off the board. Quiet, not alarming - it is a
+   decision, not a fault - but plainly different from a live order. */
+.tchip.aside{background:var(--sunk);color:var(--ink-2);border:1px dashed var(--line-2,var(--line))}
+.asideby{font-size:12.5px;line-height:1.45;color:var(--ink-2);margin:6px 0 2px;font-weight:600}
 /* ---------- the printed pick list ----------
    Emily's rule, 2026-08-21: the warehouse works off paper, so every line
    needs a REAL check box. These are drawn rectangles, never the U+2610
@@ -311,7 +315,7 @@ input,select{
 <div class="saving" id="saving"></div>
 <div id="printarea"></div>
 <script id="app-backend" type="text/plain">https://script.google.com/macros/s/AKfycbyTLrMIOBMeybJX8qrPGmZQI4feYFc6iuGbHuJfhSPf4jCOdrlg86JrZ1JeUECA0F2nqQ/exec</script>
-<script id="app-state" type="application/json">{"v":4,"settings":{"longRunHours":4},"workers":[{"id":"w_myron","name":"Myron"},{"id":"w_mike","name":"Mike"},{"id":"w_matt","name":"Matt"},{"id":"w_jo","name":"Jo"},{"id":"w_em","name":"Em"},{"id":"w_derek","name":"Derek"}],"orders":[{"id":"o_mtab1kay9ytmpf","inflowId":"d3e0dd98-badb-45c8-b4ea-09ed59e126c8","so":"SO-001017","customer":"Simple Techniques","note":"30x K2 185in Mill rails, 30x 34in + 30x 47 7/8in back legs, 50x cross clamps, 200x T-bolts w/nuts, 100x 2x2 foot brackets, 12x 600VDC surge protectors, 6x 300VAC surge protectors, 500ft 10AWG PV wire black. Customer pickup.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-26","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"c9cf8c9a-7708-49d6-bcb9-d379ad1a7260","productId":"7c863299-06a9-417d-b9b4-9fc0ebae2163","name":"K2 CrossRail 44-X 185'', Mill","qty":30,"uom":"Each"},{"id":"9527d299-41b6-42a7-a8f9-2a8a571aad3f","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":30,"uom":"Each"},{"id":"0d5c87a9-d150-45f5-95fd-0e613520adef","productId":"8cb4dd01-e385-439c-8451-6962a8305c4a","name":"P-Rail back leg 47 7/8 in","qty":30,"uom":"Each"},{"id":"52014ed8-e3f3-4a23-b73a-dd7714f7f50b","productId":"dff9f18d-84bf-4132-b1f4-440094f7babb","name":"K2 Cross Clamp Set, End/Mid Clamp, 30-45mm, Mill","qty":50,"uom":"Each"},{"id":"e7878206-34fd-4245-b029-7c37939c4f25","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":200,"uom":"Each"},{"id":"2546d1b7-cb97-4c0a-a2fb-ba3ed16f8f9d","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":100,"uom":"Each"},{"id":"554aa424-c6f0-44ad-9943-e584764f4739","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":12,"uom":"Each"},{"id":"ae351e8e-5070-446f-84d9-e50c7dea350b","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":6,"uom":"Each"},{"id":"cfdb5b7c-8307-4b24-bfa2-f63010605124","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":500,"uom":"Foot"}],"dupOf":[{"so":"SQ-000438","pct":100,"exact":false,"sameDay":false}]},{"id":"o_mtab1kays9ivup","inflowId":"b0aa8aad-4f1f-4387-8345-27e70cee59ea","so":"SO-001009","customer":"Excel Energy","note":"Array wiring for the 3x Sol-Ark ground mount - IMO disconnects, PV wire, surge protectors. Ship UPS.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"edd9809a-1339-4c12-96f7-35a6afd768de","productId":"bf0a525c-ad16-4781-9f86-b9470c58a487","name":"16A 6 POLE DC Switch IMO Breakers","qty":5,"uom":"Each"},{"id":"1ffbcb97-c1be-42ea-b3f0-b7296500bbd6","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":1000,"uom":"Foot"},{"id":"1c40b3a3-79dc-431d-8d23-47048768b563","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":1000,"uom":"Foot"},{"id":"3f2e7f9b-8098-4289-b64e-b2ca05b3f4da","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":6,"uom":"Each"},{"id":"af3cd52a-bda4-4280-a6dc-3e628fd84a5b","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":3,"uom":"Each"},{"id":"caf43f70-b270-4bc8-ac7d-49c5d9df1cab","productId":"ba28db2a-60d0-4365-b894-4d5d76229717","name":"25A 700 VDC 6 Pole DC Switch IMO Breakers","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayfv378x","inflowId":"e744f00b-7441-4c0e-b996-482e2b9bd41f","so":"SO-001014","customer":"Toby Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"f66e306f-3c9a-4126-a6de-aabfb4522b4c","productId":"d52a899d-f898-42f4-810e-1239962dd6d5","name":"200 W BR Solar Panels","qty":2,"uom":"Each"},{"id":"56af5052-5d0d-4d51-a640-31b76ad48327","productId":"b98aff72-2d59-4d3f-a5bd-3b1bdbaafc52","name":"Shipping","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kay79ii66","inflowId":"4817a47a-db19-43e8-8922-b9edd017c0f3","so":"SQ-000438","customer":"Simple Techniques","note":"Parts order per Lester's 8/25 email, corrected 8/25. Customer pickup - Lester's driver. Do NOT book freight.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"f08288e9-e3af-4067-bbf4-6f17d5239817","productId":"7c863299-06a9-417d-b9b4-9fc0ebae2163","name":"K2 CrossRail 44-X 185'', Mill","qty":30,"uom":"Each"},{"id":"3417ac6a-7ce4-4b2a-a2fb-83e9feb47fde","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":30,"uom":"Each"},{"id":"7cddcc74-85ba-474c-a3c7-59e14a0dd22c","productId":"8cb4dd01-e385-439c-8451-6962a8305c4a","name":"P-Rail back leg 47 7/8 in","qty":30,"uom":"Each"},{"id":"9257f6a8-e81f-440b-9ddb-8b388e82b84f","productId":"dacd2594-ed1c-4d0b-a59c-68d76919f153","name":"K2 Rail Connector CR 44-X, Set, Mill","qty":20,"uom":"Each"},{"id":"9163fc43-c1db-4f70-9085-6cc6021aaeaa","productId":"dff9f18d-84bf-4132-b1f4-440094f7babb","name":"K2 Cross Clamp Set, End/Mid Clamp, 30-45mm, Mill","qty":20,"uom":"Each"},{"id":"30f30698-d004-4acf-86d8-052c7ffd2d24","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":100,"uom":"Each"},{"id":"f8d0571e-b9c7-4579-a545-10c11b4032bf","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":100,"uom":"Each"},{"id":"784a9869-ce1b-47cd-9669-ec867a43786a","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":1,"uom":"Each"},{"id":"1cca32bb-58a2-4b56-820b-5a640b349a5a","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":6,"uom":"Each"},{"id":"fca11f6c-f62e-4b12-8ce1-7f3c07a64327","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":500,"uom":"Each"}],"dupOf":[{"so":"SO-001017","pct":100,"exact":false,"sameDay":false}]},{"id":"o_mtab1kaymr64yt","inflowId":"b51f0a9a-6dd7-410e-8090-db28be7e828d","so":"SO-001005","customer":"Ernie Fry","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-24","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"1c59261d-5be9-43dd-a950-51f39cb96875","productId":"b7b68bd2-2bb1-454a-ba99-525f23a6b604","name":"DROK 24V Power Supply","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayvz773p","inflowId":"77ccbad4-118d-4ada-854a-ce99b58f1801","so":"SO-001008","customer":"Ernie Fry","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-24","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"37af6717-5e17-4d0a-ae86-085e5c20fe64","productId":"a0d37058-aad1-4ecd-a0ac-017e3bc76b8f","name":"12/3 sj generator cord","qty":10,"uom":"Foot"},{"id":"79110f7e-4180-4cf8-8c96-c138a6028765","productId":"4305d9e2-11db-46e9-b171-803cae859d78","name":"Suplevel Extension Cord Male Ends , 15 Amp 125 Volt NEMA 5-15 Heavy...","qty":1,"uom":"Box"}],"dupOf":[]},{"id":"o_mtab1kayvvh12c","inflowId":"3f81c6a2-77d4-4e19-9a6b-15c0e8d7b420","so":"SO-001003","customer":"High Mesa Solar LLC","note":"PHONE ORDER. Olan told Derek by phone on 2026-08-21 that he needs this breaker and the cover. Confirmed to Claude by Emily the same day. That call is the order - there is no written PO for these two lines, so this remark is the record of it. DROP SHIP: Amazon order -5671457 ships both items direct to Antonito CO. Breaker arrives Aug 29-31, cover arrives Sep 2-4. Nothing lands at Goshen. DO NOT ...","status":"open","createdAt":1787761508360,"orderDate":"2026-08-21","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"cb5dab3f-05bb-5bb8-a020-455f5a17408d","productId":"e989dd4b-bc89-436b-9b48-a1f59088f187","name":"Heschen 250A DC550V 2-Pole DC MCCB Molded Case Circuit Breaker (HSM...","qty":1,"uom":"Each"},{"id":"87094780-5ce9-5992-ad6f-f9ea17c28a91","productId":"1ccf7a67-2716-4adf-a104-936d2962f2fa","name":"CENYENS IP66 Outdoor Enclosure Box for 125A/200A/250A DC MCCB (CYB-...","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayjp3fxv","inflowId":"87d0cc9e-5c50-40ca-b076-badf5aa73a1b","so":"SO-001004","customer":"Paul Lambright","note":"Ship by 2026-08-26. Sorry it took so long .","status":"open","createdAt":1787761508360,"orderDate":"2026-08-21","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"c4d73d9a-ecf3-44c6-974d-1b42a6c0c59d","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":16,"uom":"Each"},{"id":"250a69c9-5054-4db1-bdb8-7779e654cb33","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"0068157f-a36b-4d15-9e92-fd1546079bee","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"ace81aaf-2cae-4a77-b226-6f7274fa37f4","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"867f76a7-a00e-4c67-99ea-506513799001","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"6a23ccee-8a00-4ca8-936c-19dd72c0f5ef","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"269a46e9-85e3-4c6d-8769-29aa217abe52","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":64,"uom":"Each"},{"id":"bb3d60d5-6e39-43bc-a7e1-8cedc8806911","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":64,"uom":"Each"},{"id":"36007385-85dd-469e-8bdf-7cf86457bf65","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayh40obg","inflowId":"4be8ef51-a993-4b18-a3fa-93478bab913e","so":"SO-000993","customer":"Elam Ray Zimmerman","note":"Not yet sent to customer.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-20","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"57b5082e-6097-4408-9db3-374dfddf0506","productId":"a980087d-c53b-4bc7-98ce-8ff26074b15d","name":"Longi 620W Bi-Facial Solar Panel","qty":18,"uom":"Each"},{"id":"dc6b5d92-d133-4155-b67e-574f5c5ca651","productId":"68292137-631f-4a73-bfa8-0a92c7b5118a","name":"Sol-Ark 15K-2P All-In-One Hybrid Inverter","qty":1,"uom":"Each"},{"id":"d4762423-506c-4315-b451-c87877abbd8e","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":1,"uom":"Each"},{"id":"03a680c8-8768-436c-bafe-c6e846cf73c4","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"d272cc3c-5574-493c-b15e-d5d17b329922","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"3330209f-8cea-4a31-bacf-8fe78be54bfb","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"ca64d989-6f39-450d-92dc-11f01be5ea4c","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"c84a372e-b4ae-428f-8e05-bcc6e8124163","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"29b780ff-7816-4a5c-8a9a-5047bd36baf5","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":2,"uom":"Each"},{"id":"22ee6aad-0304-411f-b246-cc6c7d93d37c","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":2,"uom":"Each"},{"id":"de9512d6-0e44-4a20-a13e-227ca7173e3a","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":72,"uom":"Each"},{"id":"3f3ea021-8c4e-4cfe-ba96-33606b08a64d","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":72,"uom":"Each"},{"id":"a62ad5b5-1417-477c-9f70-e6806c7f6d44","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"ec54b961-9e4a-4601-bb8c-05a4bba5755b","productId":"4fa513df-9648-4611-89bc-afb981f9dc3f","name":"6 pole 32a Enclosed DC Switch IMO Breaker","qty":1,"uom":"Each"},{"id":"8d344520-b118-4903-a533-950bf00ea5c6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":3,"uom":"Each"},{"id":"aa41adf2-36e4-4bcd-9349-745155624930","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"}],"dupOf":[{"so":"SO-000996","pct":93,"exact":false,"sameDay":true}]},{"id":"o_mtab1kay92y2mu","inflowId":"83cc56fc-d895-43f8-a216-848770c6c424","so":"SO-000996","customer":"Elam Ray Zimmerman","note":"FES-0819-EZ Rev 4 pricing build (B2, budget option, ground rack, 18 panel, Growatt 11.4kW grid-tie, no battery). Companion to A2 (SO-000993). Not yet sent to customer.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-20","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"8bd7636f-711d-4702-bc4e-c958dbfda70f","productId":"a980087d-c53b-4bc7-98ce-8ff26074b15d","name":"Longi 620W Bi-Facial Solar Panel","qty":18,"uom":"Each"},{"id":"2e4e46f6-5f5d-4500-b9f6-77ef4dd4a438","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"101c160c-2cb0-491a-9006-406e18a6035b","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"9f60b096-71a7-4194-b7bf-3e8713b0d1b4","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"00eba4a6-19cb-4619-ae9c-c97b004d419e","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"b7c92c1b-d899-4706-b5b8-7003a418e5d0","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"a4dc26a0-025c-44b8-ac65-d78167cefab1","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":2,"uom":"Each"},{"id":"4dac1778-1bd8-410c-ab53-a9cae28e4f62","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":2,"uom":"Each"},{"id":"a6cd32bf-dc21-4bae-9b56-b2421652e46f","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":72,"uom":"Each"},{"id":"58119d34-8392-4fad-991f-b693a11c24c7","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":72,"uom":"Each"},{"id":"9b01e28d-c678-4f4e-8571-e05ac3edb4ef","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"b1f3cb05-bfe9-4080-8950-1da70a1e6d82","productId":"4fa513df-9648-4611-89bc-afb981f9dc3f","name":"6 pole 32a Enclosed DC Switch IMO Breaker","qty":1,"uom":"Each"},{"id":"b4ec82ab-0b48-4c15-bbfe-b2a1b8a2eb10","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":2,"uom":"Each"},{"id":"bd5d3b38-da54-42ab-baf1-91e24ef6b35d","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"dbb4b439-a7b1-4e7d-9982-a180f80ec415","productId":"d7d50681-4c7d-41cc-b3b6-878250f7f174","name":"Growatt 11.4kW Grid-Tie Inverter | MIN11400TL-XH-US","qty":1,"uom":"Each"}],"dupOf":[{"so":"SO-000993","pct":93,"exact":false,"sameDay":true}]},{"id":"o_mtab1kayo23sux","inflowId":"0cc9aef7-4ba6-47e0-b2ac-d7dbc9d6d959","so":"SO-000983","customer":"Joas Zehr","note":"3 AWG THHN black + 8 AWG THHN green ground + 100A 2-pole breaker - generator feed wire upgrade, Sol-Ark 15K install (75 ft run)","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"a04e74e5-fc77-41a9-bdbf-750e3057ec62","productId":"d1c9c930-091b-4351-a958-f5b7f299150c","name":"3AWG THHN Wire Black","qty":225,"uom":"Foot"},{"id":"4f503b03-6bdb-4ab5-9574-441773ede46d","productId":"9f99469f-965f-4f68-b498-83e25dc9b072","name":"8 AWG THHN STRAND GREEN","qty":75,"uom":"Foot"},{"id":"c3371bc8-742c-45c6-9399-208f91e957ae","productId":"1599247f-2c31-4ecb-97ce-0e5ccddb3c05","name":"Homeline 2 pole 100A Breaker","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaypsclr3","inflowId":"889b7381-9fb9-4e2a-9692-8b1bd08ac954","so":"SO-000986","customer":"Eco Tech","note":"He wants this when they come in","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"5b81ba2c-1700-436f-9b6a-9cba266e191a","productId":"16e4b59a-1e81-43a3-8789-2d02acadd389","name":"Koor 12KW Off Grid Inverter WO/Breakers","qty":1,"uom":"Each"},{"id":"34915eaa-a3bb-4419-a904-582aff6888eb","productId":"e083f7f6-a8b7-48d6-a64f-d42bbfa228fd","name":"Koor Stackable 16kwh Expansion Module (314Ah)","qty":3,"uom":"Each"},{"id":"91c2c635-a618-421c-bd4c-986b4de93f18","productId":"64fd2642-8d64-430d-ad8d-0df00341712a","name":"Koor 12KW Off-Grid 120V/240V Inverter W/Breaker","qty":3,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaylqwlp8","inflowId":"727b212b-018e-4a08-8928-6521875b30fd","so":"SO-000992","customer":"David Eash","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"a822bed7-c346-46e6-b3f9-905adf4c3faf","productId":"16e4b59a-1e81-43a3-8789-2d02acadd389","name":"Koor 12KW Off Grid Inverter WO/Breakers","qty":1,"uom":"Each"},{"id":"a716d614-6dcf-45e7-a4e9-e2eeb1e14ecd","productId":"7dac9c66-d118-4d3a-8513-ac294f25d0ae","name":"14 Panel Ground Mount","qty":1,"uom":"Each"},{"id":"2ce4fdb0-6744-49a2-9dbe-d6af323e4ea9","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":14,"uom":"Each"},{"id":"2aa7bb2c-2889-4848-bdab-c46ea966c4e7","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":2,"uom":"Each"},{"id":"d35a2426-d17d-48ec-91a8-0968088992a6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":2,"uom":"Each"},{"id":"6b9b9073-352a-4ba5-9561-676bfa42f6d5","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"1632d0b9-b49f-4a39-8d6a-ef2c819991d9","productId":"c3a518f4-2da8-4463-a1d5-ee9c102c3adf","name":"4 pole 32A DC Switch IMO Breakers","qty":1,"uom":"Each"},{"id":"2e296b0b-a4cd-436b-91f9-bbedbb880510","productId":"fcc3f17b-b24c-4136-ab60-ef4f2fc8c47e","name":"URD Wire- ALUM URD 2-2-2-4 DYKE","qty":170,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaxoti3j0","inflowId":"c2a20c5d-02cd-47e2-88c0-b40fc96a2cbe","so":"SO-000975-1","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"84ebcffc-b5f5-4d1d-881f-82f0063c1b33","productId":"0f1b86cc-87e0-45c5-9c8a-850a3a6944c5","name":"10/4 SJOOW Portable Cord 300V UL/CSA Generator cord","qty":10,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaxsf4y13","inflowId":"eb16b79b-5a59-4499-b02b-ea6e1a4d2751","so":"SO-000975-2","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"89db7bd5-bdca-47bd-b82c-9817c7fd73c0","productId":"c3948534-f349-44ea-b039-c7ffb89d6273","name":"10/3 Type NM-B Cable with Ground Wire","qty":85,"uom":"Foot"},{"id":"7a131f78-b225-49ff-9707-f15ad8dc1db3","productId":"0f1b86cc-87e0-45c5-9c8a-850a3a6944c5","name":"10/4 SJOOW Portable Cord 300V UL/CSA Generator cord","qty":10,"uom":"Foot"},{"id":"1e40512a-a766-4582-ba82-b14ff58d13ef","productId":"72ca6da6-477c-4e9a-87a4-e6f5b45f06da","name":"2 gang RACO 4 in Galvanized Steel Square Electrical Box","qty":1,"uom":"Each"},{"id":"ef259bec-6e20-445d-ae36-7180f83e3fe6","productId":"ddfc01ac-0239-4f68-92bb-3bc4f32ea018","name":"4 in Square Cover Exposed Work 1 gang","qty":1,"uom":"Each"},{"id":"b3fcf1db-2c2c-4623-afab-c4c0120f76c0","productId":"a941a270-11fa-4672-a7ea-094d6863a2d3","name":"Misc","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax9h972f","inflowId":"a8aca891-0657-4da7-9161-27615fd0268a","so":"SO-000978","customer":"Jerry Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"9e54ae18-4dc5-45a6-bf30-a782055ede9c","productId":"85e61890-2196-4a22-b111-f453ca9df135","name":"LED 8 Foot. 150 W 19,000LM; 6000K Cold White Linkable Shop Tube Light","qty":5,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayu0rc8y","inflowId":"27a6533d-efc4-4df6-8026-513581eb6238","so":"SO-000979","customer":"Matt Stutzman","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"be87fdb7-a8c4-4b88-8db8-f62275b61841","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":156,"uom":"Foot"},{"id":"ecde106b-9020-4e0b-abdf-810ac09c2f28","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":156,"uom":"Foot"},{"id":"a8ed8ecd-3054-435b-9382-ff94bbee9497","productId":"46446a7c-a790-4f11-bf9c-8e5de02678aa","name":"Sunrise Delivery Shipping","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxz8ajdx","inflowId":"2cf3f3ee-786f-4778-a835-ade7340f249d","so":"SO-000941","customer":"Vernon E Yoder","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"d654d52b-a129-4c85-b4e3-1e845c5b4415","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":2,"uom":"Each"},{"id":"af619823-1e72-4e13-8cfb-559e1878f990","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":4,"uom":"Each"},{"id":"9ef618c7-726e-4eec-b21a-74449d294d94","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":2,"uom":"Each"},{"id":"15d5fccf-efcb-446b-965a-e04d4320e03c","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"f2c34892-3628-4e32-94e3-4c30b5d1e566","productId":"d9d44100-27b8-41c0-bf95-b2b0706aa54d","name":"SINCLAIR SEASON ADJUSTABLE JACK","qty":2,"uom":"Each"},{"id":"5d119d65-6e23-43c9-96d7-96ff83998224","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":4,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxyd52x2","inflowId":"008314cb-30f1-4e07-8452-c7e29080ae1b","so":"SQ-000394","customer":"Alton mast","note":"The max is 8 & 4 is the min on the solar panels Add 48V-24V 30A step down converter + 6-way fuse block, mounted on the FRP kit board. 50 ft PV wire (red+black) run to inverter. 2026-08-19: Converted quote to invoiced Sales Order. Customer name corrected to ALTON Mast (earlier emails mistakenly said Eldon). NOTE: order not yet picked/fulfilled in inFlow (inventoryStatus still unfulfilled) -- war...","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":true,"hasLabor":false,"lines":[{"id":"74bc4882-4a72-4a04-b28c-627aecfc179b","productId":"38729847-883d-4c15-9b44-56ce8c70b4bc","name":"Kit","qty":1,"uom":"Each"},{"id":"45f745fa-8865-4822-b670-eae89eeabebf","productId":"0089344e-275e-4863-81fe-d982e49b75e1","name":"Battery Charger 48V 25A Charger","qty":1,"uom":"Each"},{"id":"38880df4-cb5b-4fd0-b217-22b5ebe47e35","productId":"cb43b282-6144-40e4-80f6-2fc4df885059","name":"SRNE ASP4865U140-H 6.5KW 48V Off-Grid Inverter","qty":1,"uom":"Each"},{"id":"6dba4ce0-de73-4400-8da1-4d47047c9e1d","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"81d500b2-a625-4825-b13c-85f135230419","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":1,"uom":"Each"},{"id":"6943e142-8608-4944-8d63-8fc3b7063083","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":4,"uom":"Each"},{"id":"22e72373-f77d-4f09-9385-b99b18949bc3","productId":"cbb9f786-722c-459a-b3df-da2b4dd64431","name":"P-rail for 620w panel 179 in","qty":2,"uom":"Each"},{"id":"12501231-3a99-4cf5-bb06-90e557f0d974","productId":"db64d819-d767-4c31-92dd-250598cb9889","name":"P-Rail 79 3/4 in front angle for 620W","qty":4,"uom":"Each"},{"id":"a7700bd5-3c8c-4b24-baa3-dae0cea4ae0c","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":1,"uom":"Each"},{"id":"c081fa4a-c74f-4629-8c33-389524e467ae","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":8,"uom":"Each"},{"id":"43069f8f-1d33-4321-8f87-657e9ede68b8","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":16,"uom":"Each"},{"id":"f0ba1e1a-997e-48e4-9309-cf4282b15f73","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":16,"uom":"Each"},{"id":"f6307c8d-7d73-4632-b74a-0e680e383f7a","productId":"df80f314-7364-4741-9072-b222f2ce045a","name":"5/16 X 2 1/2 Hex Lag Screw Stainless Steel","qty":8,"uom":"Each"},{"id":"3493551a-fbd7-4b15-a866-12df02f201c4","productId":"bbb8d982-2d76-462f-aa6b-7973f6f17d9a","name":"5/16-18 Serrated Flange Nut 18/8 Stainless Steel","qty":12,"uom":"Each"},{"id":"c892ead6-1328-4339-8f91-d23ee2a20549","productId":"230ed4bc-2d39-4a06-9ee8-689ae1fbaeb0","name":"5/16-18 X 1 Hex Cap Screw 18/8 Stainless Steel","qty":12,"uom":"Each"},{"id":"d96b0fb2-c0d0-44f0-a48f-e44671526295","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":8,"uom":"Each"},{"id":"24a6ed01-ee81-4ec0-86cb-51d6f0a81899","productId":"3de3b149-bdc3-4ad4-81c0-3e5c7b213505","name":"48V Step Down to 24V 30A 720W Voltage Reducer Converter","qty":1,"uom":"Each"},{"id":"67ff9bb9-e854-4c2d-af7b-50bdf0f76211","productId":"5296aad9-65cf-47a5-b334-11b25c5677f7","name":"12 V Fused Block 6-Way Wupp","qty":1,"uom":"Each"},{"id":"09de9170-3643-44d5-9753-8f2d07e307e8","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":50,"uom":"Foot"},{"id":"9473ec75-428b-4290-a88b-55b3fead525b","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":50,"uom":"Foot"},{"id":"e5a169b9-506a-40d7-9d8c-93c4bf22409b","productId":"6c9f2ce7-d018-466c-a750-f5308258d44c","name":"6 AWG Bare Copper Stranded ground wire","qty":30,"uom":"Feet"},{"id":"6a0b67ae-6eb3-4540-833b-1860870fb24b","productId":"e083f7f6-a8b7-48d6-a64f-d42bbfa228fd","name":"Koor Stackable 16kwh Expansion Module (314Ah)","qty":1,"uom":"Each"},{"id":"633cdd16-ca87-488e-a79e-c5af0538b82e","productId":"a6da9d35-826c-4440-8bb1-aecee423855a","name":"Koor Smart Hub (PDU) w/ 4.3 in Touch Screen","qty":1,"uom":"Each"},{"id":"cd8a5f0f-5746-4f6d-84eb-c4cbe7f9866d","productId":"cf2a0e18-2913-444b-8d26-ef63d506083e","name":"Koor Structural Base","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax46gpyb","inflowId":"7c405cb9-a0cf-40b3-b946-ae9548479fd1","so":"SO-000943","customer":"Elmer Mast","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"62846a29-1ca8-4d0a-a609-79220a008c07","productId":"c283a614-6183-4fed-8473-d7c4d3d092c0","name":"10/3 Type UF-B Cable with Ground Wire","qty":90,"uom":"Foot"},{"id":"e3348ed3-6981-42fa-b492-8aa9ea4d8422","productId":"0d46a896-58ac-4c21-8592-580defd52bbc","name":"30 A plug 125/250 Male","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxskszse","inflowId":"45b1d54c-1cd5-410d-b4dc-a7c8e75f0b70","so":"SO-000892","customer":"Tobacco River Solar","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-07-31","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"42959b65-02c3-4e2e-a651-4534982f890a","productId":"22d06a37-5233-4629-a92f-0c5129a12e7e","name":"Delta 3 MAX PLUS (2048wh)","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kawcg82qw","inflowId":"03ec8f3c-79d6-4263-9713-a479a6381b95","so":"SO-000890","customer":"Simple Techniques","note":"CUSTOMER PICKUP - Lester's own driver will pick up at the shop, target within the next 2 weeks. Do NOT book freight. Send these out WITH the SO-000868 pickup. After this order ships the Mate Solar 430W product is being retired (count reconciled to 0 and product deactivated).","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"3f247266-6ead-4d32-a87f-5e623aad776a","productId":"315658d1-0a64-4f61-8498-bda5b917c817","name":"Mate Solar 430W All-Black Bifacial Solar Panel","qty":40,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxas3hye","inflowId":"3eea04a9-d323-4624-aa30-4b1cd4bbb6dc","so":"SO-000885","customer":"Lug Off-grid","note":"He will confirm","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"8bd5c578-e962-40a5-b009-4c473f573a94","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":2,"uom":"Each"},{"id":"39b2a86e-2faf-4bc5-a3c9-07c3aa9490a6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":6,"uom":"Each"},{"id":"f98263ce-b59d-481d-91b2-3c396e14fd5c","productId":"8c69037f-3357-4d40-b8e0-110af5afdde1","name":"Sol-Ark 12K-2P-LL Hybrid Inverter","qty":2,"uom":"Each"},{"id":"131cffb8-88c7-4c38-a317-2b10c67d5124","productId":"05925a2e-c036-4215-9220-c630de56d219","name":"Br Solar Panel 455W Black on Black Bi-Facial","qty":6,"uom":"Each"},{"id":"281cc740-9972-404b-8dc4-ab2e4c25901f","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":14,"uom":"Each"},{"id":"5a500f29-ac5c-41a6-9bf4-cfb0b530dc55","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":2,"uom":"Each"},{"id":"a5a42132-0fca-421f-95eb-54be8fc74e54","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":2,"uom":"Each"},{"id":"561d5d7d-fe3e-4bc9-8bea-e35937b06d6d","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":4,"uom":"Each"},{"id":"6f7a6e7d-de97-47f3-8cd9-f25784e46dd0","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":4,"uom":"Each"},{"id":"7f16979a-1467-4d45-89e1-0afd3d0be45c","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":4,"uom":"Each"},{"id":"48aef992-25d5-47dd-bee6-7df00c6b1a44","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"b09ce1da-a29f-4c12-9d88-7159c178b312","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":2,"uom":"Each"},{"id":"7e828fbf-3372-407a-afb4-dc7479467830","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":144,"uom":"Each"},{"id":"c816c1c2-73fc-44a4-8a06-a9441f11387b","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":144,"uom":"Each"},{"id":"ecb34042-896f-43ad-8e05-ee73415d099e","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"e5dcb036-8f73-4ab0-abb7-21bd73403fa5","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":1000,"uom":"Foot"},{"id":"d6169780-9923-48fa-aa71-9a61138db639","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":1000,"uom":"Foot"},{"id":"e8fa9b68-1f53-4f4b-b7bd-bb4f7d3081f0","productId":"bdff2176-2a23-4784-a397-7bce226bcee4","name":"K2 Racking Kit MiniRail, 17 in Rail/Bracket w/Everseal,","qty":34,"uom":"Each"},{"id":"56827104-d879-4b7a-892f-fe20a27d7b3f","productId":"8e8f9b64-98b3-4c58-afb2-439870a2db7e","name":"K2 cross clamp dark","qty":34,"uom":"Each"},{"id":"0341a671-6ebd-40fa-bd8b-8d4beb3d004b","productId":"bf838919-1812-488b-8fa8-2edc9cf07866","name":"K2 Ground Clamp","qty":3,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax98b4eu","inflowId":"f4a62293-2635-4af8-9cab-9704c91a6ff0","so":"SO-000891","customer":"Yoder, Nate","note":"Job: NATE YODER - 67744 Co Rd 37, Millersburg IN 46543. Site contact Nate . Ordered 180 ft; All Phase only sells this by the 250 ft factory coil, so the full coil ships and the full coil gets billed. Measure the actual leftover - do not assume 70 ft. Process as a Return on this order so he is credited and the footage comes back into stock. ***","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"5cee7ad0-2d06-409d-8820-398393a92939","productId":"ec2d5866-19df-4d5a-bbdd-fc6ec5d1a066","name":"UF Type Wire 10/2 Direct Burial UF-B Cable","qty":250,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaw9m3hoo","inflowId":"ea25c8bc-db0b-4b91-898f-b8237c4392e5","so":"SO-000877","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-07-29","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":true,"lines":[{"id":"34229f44-4b60-4965-a4d3-7003f602571d","productId":"35e6fa19-f977-4ec9-aa2c-68be9f178227","name":"6 AWG 3/8 Battery Lugs w/ Heat Shrink Tubing","qty":1,"uom":"packs"}],"dupOf":[]}],"entries":[],"picks":{}}</script>
+<script id="app-state" type="application/json">{"v":4,"settings":{"longRunHours":4},"workers":[{"id":"w_myron","name":"Myron"},{"id":"w_mike","name":"Mike"},{"id":"w_matt","name":"Matt"},{"id":"w_jo","name":"Jo"},{"id":"w_em","name":"Em"},{"id":"w_derek","name":"Derek"}],"orders":[{"id":"o_mtagfketnoukgk","trackerId":"INST-2026-025","src":"tracker","so":"INST-2026-025","customer":"Lynn Schmucker","note":"Scheduled: Week of Oct 5, 2026. Site: Topeka, IN. Full install (not a kit) — pole-mounted solar. Sol-Ark 12K-2P-LL inverter, 2x Koor 16 kWh battery, 24x Boviet 620W panels.","status":"open","createdAt":1787770559764,"orderDate":"2026-10-05","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfkessbilk9","trackerId":"INST-2026-005","src":"tracker","so":"INST-2026-005","customer":"Steve Affinety","note":"Scheduled: TBD.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfkesuz7yzp","trackerId":"INST-2026-007","src":"tracker","so":"INST-2026-007","customer":"John E Miller","note":"Scheduled: TBD. Install timers + 15A and 20A contactors in a plastic box for the stir fans. Add a bypass (of sorts) to the generator.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketyp265x","trackerId":"INST-2026-009","src":"tracker","so":"INST-2026-009","customer":"Jay Bontrager","note":"Scheduled: TBD. Site: Middlebury, IN. Add-on visit — deliver/install an extra Pytes 48V 100Ah battery and run additional NM-B wire.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket3a6w7m","trackerId":"INST-2026-010","src":"tracker","so":"INST-2026-010","customer":"J & R Woodworking","note":"Scheduled: ASAP — date TBD. Site: LaGrange, IN. Check batteries — diagnose on site (model TBD)","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket81av1s","trackerId":"INST-2026-011","src":"tracker","so":"INST-2026-011","customer":"Arlin Slabach","note":"Scheduled: TBD. Site: Goshen, IN. Swap out the 8KW inverter for a 12KW","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket73xr4t","trackerId":"INST-2026-012","src":"tracker","so":"INST-2026-012","customer":"Davey","note":"Scheduled: TBD. Replace panels on SR 120.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketoy6znt","trackerId":"INST-2026-013","src":"tracker","so":"INST-2026-013","customer":"Arlin Lehman","note":"Scheduled: TBD. Site: Nappanee, IN. TBD — to confirm","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketvldhww","trackerId":"INST-2026-016","src":"tracker","so":"INST-2026-016","customer":"Jay Bontrager","note":"Scheduled: TBD — when Jay is home. Site: Middlebury, IN. Pre-install site visit — confirm receptacle locations with customer","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfkets0dhni","trackerId":"INST-2026-018","src":"tracker","so":"INST-2026-018","customer":"Cloverleaf Finishing LLC","note":"Scheduled: TBD. Site: Goshen, IN. Deliver a 500W panel with brackets. Inspect the wiring to confirm it's good, and check whether he needs caulk.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketivw76m","trackerId":"INST-2026-021","src":"tracker","so":"INST-2026-021","customer":"Nate Kurtz","note":"Scheduled: TBD. New lead — 600 ft of wire.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket24vuim","trackerId":"INST-2026-022","src":"tracker","so":"INST-2026-022","customer":"Jaymar Miller","note":"Scheduled: TBD. Site: W Shipshewana, IN. 1) Run wire from the washroom to the basement. 2) Swap out the EG4 3kW inverter for a Sol-Ark 5K. 3) Full refund back to him on the EG4 3kW.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketo4udua","trackerId":"INST-2026-023","src":"tracker","so":"INST-2026-023","customer":"Dennis A Miller","note":"Scheduled: TBD. Site: Middlebury, IN. Off-grid ground-mount solar for the 50,000-bird pullet barn. PHASE 1 = 50 panels, ONE row, 1,453.8 sq ft, 31.0 kW DC. Posts are already driven. Phase 2 (+46 panels, 50 ft south) comes later on a Special Use permit.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket4tnw5k","trackerId":"INST-2026-024","src":"tracker","so":"INST-2026-024","customer":"Sam D Miller","note":"Scheduled: TBD. Site: Goshen, IN. Off-grid solar install (installed, not a pickup kit) — reduced option: Sol-Ark 12K-2P-LL inverter, 1x Koor 16 kWh battery, 8x Boviet 620W B-grade panels, P-Rail tilt racking.","status":"open","createdAt":1787770559764,"orderDate":null,"tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtab1kay9ytmpf","inflowId":"d3e0dd98-badb-45c8-b4ea-09ed59e126c8","so":"SO-001017","customer":"Simple Techniques","note":"30x K2 185in Mill rails, 30x 34in + 30x 47 7/8in back legs, 50x cross clamps, 200x T-bolts w/nuts, 100x 2x2 foot brackets, 12x 600VDC surge protectors, 6x 300VAC surge protectors, 500ft 10AWG PV wire black. Customer pickup.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-26","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"c9cf8c9a-7708-49d6-bcb9-d379ad1a7260","productId":"7c863299-06a9-417d-b9b4-9fc0ebae2163","name":"K2 CrossRail 44-X 185'', Mill","qty":30,"uom":"Each"},{"id":"9527d299-41b6-42a7-a8f9-2a8a571aad3f","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":30,"uom":"Each"},{"id":"0d5c87a9-d150-45f5-95fd-0e613520adef","productId":"8cb4dd01-e385-439c-8451-6962a8305c4a","name":"P-Rail back leg 47 7/8 in","qty":30,"uom":"Each"},{"id":"52014ed8-e3f3-4a23-b73a-dd7714f7f50b","productId":"dff9f18d-84bf-4132-b1f4-440094f7babb","name":"K2 Cross Clamp Set, End/Mid Clamp, 30-45mm, Mill","qty":50,"uom":"Each"},{"id":"e7878206-34fd-4245-b029-7c37939c4f25","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":200,"uom":"Each"},{"id":"2546d1b7-cb97-4c0a-a2fb-ba3ed16f8f9d","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":100,"uom":"Each"},{"id":"554aa424-c6f0-44ad-9943-e584764f4739","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":12,"uom":"Each"},{"id":"ae351e8e-5070-446f-84d9-e50c7dea350b","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":6,"uom":"Each"},{"id":"cfdb5b7c-8307-4b24-bfa2-f63010605124","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":500,"uom":"Foot"}],"dupOf":[{"so":"SQ-000438","pct":100,"exact":false,"sameDay":false}]},{"id":"o_mtab1kays9ivup","inflowId":"b0aa8aad-4f1f-4387-8345-27e70cee59ea","so":"SO-001009","customer":"Excel Energy","note":"Array wiring for the 3x Sol-Ark ground mount - IMO disconnects, PV wire, surge protectors. Ship UPS.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"edd9809a-1339-4c12-96f7-35a6afd768de","productId":"bf0a525c-ad16-4781-9f86-b9470c58a487","name":"16A 6 POLE DC Switch IMO Breakers","qty":5,"uom":"Each"},{"id":"1ffbcb97-c1be-42ea-b3f0-b7296500bbd6","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":1000,"uom":"Foot"},{"id":"1c40b3a3-79dc-431d-8d23-47048768b563","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":1000,"uom":"Foot"},{"id":"3f2e7f9b-8098-4289-b64e-b2ca05b3f4da","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":6,"uom":"Each"},{"id":"af3cd52a-bda4-4280-a6dc-3e628fd84a5b","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":3,"uom":"Each"},{"id":"caf43f70-b270-4bc8-ac7d-49c5d9df1cab","productId":"ba28db2a-60d0-4365-b894-4d5d76229717","name":"25A 700 VDC 6 Pole DC Switch IMO Breakers","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayfv378x","inflowId":"e744f00b-7441-4c0e-b996-482e2b9bd41f","so":"SO-001014","customer":"Toby Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"f66e306f-3c9a-4126-a6de-aabfb4522b4c","productId":"d52a899d-f898-42f4-810e-1239962dd6d5","name":"200 W BR Solar Panels","qty":2,"uom":"Each"},{"id":"56af5052-5d0d-4d51-a640-31b76ad48327","productId":"b98aff72-2d59-4d3f-a5bd-3b1bdbaafc52","name":"Shipping","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kay79ii66","inflowId":"4817a47a-db19-43e8-8922-b9edd017c0f3","so":"SQ-000438","customer":"Simple Techniques","note":"Parts order per Lester's 8/25 email, corrected 8/25. Customer pickup - Lester's driver. Do NOT book freight.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-25","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"f08288e9-e3af-4067-bbf4-6f17d5239817","productId":"7c863299-06a9-417d-b9b4-9fc0ebae2163","name":"K2 CrossRail 44-X 185'', Mill","qty":30,"uom":"Each"},{"id":"3417ac6a-7ce4-4b2a-a2fb-83e9feb47fde","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":30,"uom":"Each"},{"id":"7cddcc74-85ba-474c-a3c7-59e14a0dd22c","productId":"8cb4dd01-e385-439c-8451-6962a8305c4a","name":"P-Rail back leg 47 7/8 in","qty":30,"uom":"Each"},{"id":"9257f6a8-e81f-440b-9ddb-8b388e82b84f","productId":"dacd2594-ed1c-4d0b-a59c-68d76919f153","name":"K2 Rail Connector CR 44-X, Set, Mill","qty":20,"uom":"Each"},{"id":"9163fc43-c1db-4f70-9085-6cc6021aaeaa","productId":"dff9f18d-84bf-4132-b1f4-440094f7babb","name":"K2 Cross Clamp Set, End/Mid Clamp, 30-45mm, Mill","qty":20,"uom":"Each"},{"id":"30f30698-d004-4acf-86d8-052c7ffd2d24","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":100,"uom":"Each"},{"id":"f8d0571e-b9c7-4579-a545-10c11b4032bf","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":100,"uom":"Each"},{"id":"784a9869-ce1b-47cd-9669-ec867a43786a","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":1,"uom":"Each"},{"id":"1cca32bb-58a2-4b56-820b-5a640b349a5a","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":6,"uom":"Each"},{"id":"fca11f6c-f62e-4b12-8ce1-7f3c07a64327","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":500,"uom":"Each"}],"dupOf":[{"so":"SO-001017","pct":100,"exact":false,"sameDay":false}]},{"id":"o_mtab1kaymr64yt","inflowId":"b51f0a9a-6dd7-410e-8090-db28be7e828d","so":"SO-001005","customer":"Ernie Fry","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-24","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"1c59261d-5be9-43dd-a950-51f39cb96875","productId":"b7b68bd2-2bb1-454a-ba99-525f23a6b604","name":"DROK 24V Power Supply","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayvz773p","inflowId":"77ccbad4-118d-4ada-854a-ce99b58f1801","so":"SO-001008","customer":"Ernie Fry","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-24","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"37af6717-5e17-4d0a-ae86-085e5c20fe64","productId":"a0d37058-aad1-4ecd-a0ac-017e3bc76b8f","name":"12/3 sj generator cord","qty":10,"uom":"Foot"},{"id":"79110f7e-4180-4cf8-8c96-c138a6028765","productId":"4305d9e2-11db-46e9-b171-803cae859d78","name":"Suplevel Extension Cord Male Ends , 15 Amp 125 Volt NEMA 5-15 Heavy...","qty":1,"uom":"Box"}],"dupOf":[]},{"id":"o_mtab1kayvvh12c","inflowId":"3f81c6a2-77d4-4e19-9a6b-15c0e8d7b420","so":"SO-001003","customer":"High Mesa Solar LLC","note":"PHONE ORDER. Olan told Derek by phone on 2026-08-21 that he needs this breaker and the cover. Confirmed to Claude by Emily the same day. That call is the order - there is no written PO for these two lines, so this remark is the record of it. DROP SHIP: Amazon order -5671457 ships both items direct to Antonito CO. Breaker arrives Aug 29-31, cover arrives Sep 2-4. Nothing lands at Goshen. DO NOT ...","status":"open","createdAt":1787761508360,"orderDate":"2026-08-21","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"cb5dab3f-05bb-5bb8-a020-455f5a17408d","productId":"e989dd4b-bc89-436b-9b48-a1f59088f187","name":"Heschen 250A DC550V 2-Pole DC MCCB Molded Case Circuit Breaker (HSM...","qty":1,"uom":"Each"},{"id":"87094780-5ce9-5992-ad6f-f9ea17c28a91","productId":"1ccf7a67-2716-4adf-a104-936d2962f2fa","name":"CENYENS IP66 Outdoor Enclosure Box for 125A/200A/250A DC MCCB (CYB-...","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayjp3fxv","inflowId":"87d0cc9e-5c50-40ca-b076-badf5aa73a1b","so":"SO-001004","customer":"Paul Lambright","note":"Ship by 2026-08-26. Sorry it took so long .","status":"open","createdAt":1787761508360,"orderDate":"2026-08-21","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"c4d73d9a-ecf3-44c6-974d-1b42a6c0c59d","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":16,"uom":"Each"},{"id":"250a69c9-5054-4db1-bdb8-7779e654cb33","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"0068157f-a36b-4d15-9e92-fd1546079bee","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"ace81aaf-2cae-4a77-b226-6f7274fa37f4","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"867f76a7-a00e-4c67-99ea-506513799001","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"6a23ccee-8a00-4ca8-936c-19dd72c0f5ef","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"269a46e9-85e3-4c6d-8769-29aa217abe52","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":64,"uom":"Each"},{"id":"bb3d60d5-6e39-43bc-a7e1-8cedc8806911","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":64,"uom":"Each"},{"id":"36007385-85dd-469e-8bdf-7cf86457bf65","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayh40obg","inflowId":"4be8ef51-a993-4b18-a3fa-93478bab913e","so":"SO-000993","customer":"Elam Ray Zimmerman","note":"Not yet sent to customer.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-20","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"57b5082e-6097-4408-9db3-374dfddf0506","productId":"a980087d-c53b-4bc7-98ce-8ff26074b15d","name":"Longi 620W Bi-Facial Solar Panel","qty":18,"uom":"Each"},{"id":"dc6b5d92-d133-4155-b67e-574f5c5ca651","productId":"68292137-631f-4a73-bfa8-0a92c7b5118a","name":"Sol-Ark 15K-2P All-In-One Hybrid Inverter","qty":1,"uom":"Each"},{"id":"d4762423-506c-4315-b451-c87877abbd8e","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":1,"uom":"Each"},{"id":"03a680c8-8768-436c-bafe-c6e846cf73c4","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"d272cc3c-5574-493c-b15e-d5d17b329922","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"3330209f-8cea-4a31-bacf-8fe78be54bfb","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"ca64d989-6f39-450d-92dc-11f01be5ea4c","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"c84a372e-b4ae-428f-8e05-bcc6e8124163","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"29b780ff-7816-4a5c-8a9a-5047bd36baf5","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":2,"uom":"Each"},{"id":"22ee6aad-0304-411f-b246-cc6c7d93d37c","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":2,"uom":"Each"},{"id":"de9512d6-0e44-4a20-a13e-227ca7173e3a","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":72,"uom":"Each"},{"id":"3f3ea021-8c4e-4cfe-ba96-33606b08a64d","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":72,"uom":"Each"},{"id":"a62ad5b5-1417-477c-9f70-e6806c7f6d44","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"ec54b961-9e4a-4601-bb8c-05a4bba5755b","productId":"4fa513df-9648-4611-89bc-afb981f9dc3f","name":"6 pole 32a Enclosed DC Switch IMO Breaker","qty":1,"uom":"Each"},{"id":"8d344520-b118-4903-a533-950bf00ea5c6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":3,"uom":"Each"},{"id":"aa41adf2-36e4-4bcd-9349-745155624930","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"}],"dupOf":[{"so":"SO-000996","pct":93,"exact":false,"sameDay":true}]},{"id":"o_mtab1kay92y2mu","inflowId":"83cc56fc-d895-43f8-a216-848770c6c424","so":"SO-000996","customer":"Elam Ray Zimmerman","note":"Companion to A2 (SO-000993). Not yet sent to customer.","status":"open","createdAt":1787761508360,"orderDate":"2026-08-20","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"8bd7636f-711d-4702-bc4e-c958dbfda70f","productId":"a980087d-c53b-4bc7-98ce-8ff26074b15d","name":"Longi 620W Bi-Facial Solar Panel","qty":18,"uom":"Each"},{"id":"2e4e46f6-5f5d-4500-b9f6-77ef4dd4a438","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":3,"uom":"Each"},{"id":"101c160c-2cb0-491a-9006-406e18a6035b","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":3,"uom":"Each"},{"id":"9f60b096-71a7-4194-b7bf-3e8713b0d1b4","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":3,"uom":"Each"},{"id":"00eba4a6-19cb-4619-ae9c-c97b004d419e","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"b7c92c1b-d899-4706-b5b8-7003a418e5d0","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":8,"uom":"Each"},{"id":"a4dc26a0-025c-44b8-ac65-d78167cefab1","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":2,"uom":"Each"},{"id":"4dac1778-1bd8-410c-ab53-a9cae28e4f62","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":2,"uom":"Each"},{"id":"a6cd32bf-dc21-4bae-9b56-b2421652e46f","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":72,"uom":"Each"},{"id":"58119d34-8392-4fad-991f-b693a11c24c7","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":72,"uom":"Each"},{"id":"9b01e28d-c678-4f4e-8571-e05ac3edb4ef","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"b1f3cb05-bfe9-4080-8950-1da70a1e6d82","productId":"4fa513df-9648-4611-89bc-afb981f9dc3f","name":"6 pole 32a Enclosed DC Switch IMO Breaker","qty":1,"uom":"Each"},{"id":"b4ec82ab-0b48-4c15-bbfe-b2a1b8a2eb10","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":2,"uom":"Each"},{"id":"bd5d3b38-da54-42ab-baf1-91e24ef6b35d","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"dbb4b439-a7b1-4e7d-9982-a180f80ec415","productId":"d7d50681-4c7d-41cc-b3b6-878250f7f174","name":"Growatt 11.4kW Grid-Tie Inverter | MIN11400TL-XH-US","qty":1,"uom":"Each"}],"dupOf":[{"so":"SO-000993","pct":93,"exact":false,"sameDay":true}]},{"id":"o_mtab1kayo23sux","inflowId":"0cc9aef7-4ba6-47e0-b2ac-d7dbc9d6d959","so":"SO-000983","customer":"Joas Zehr","note":"3 AWG THHN black + 8 AWG THHN green ground + 100A 2-pole breaker - generator feed wire upgrade, Sol-Ark 15K install (75 ft run)","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"a04e74e5-fc77-41a9-bdbf-750e3057ec62","productId":"d1c9c930-091b-4351-a958-f5b7f299150c","name":"3AWG THHN Wire Black","qty":225,"uom":"Foot"},{"id":"4f503b03-6bdb-4ab5-9574-441773ede46d","productId":"9f99469f-965f-4f68-b498-83e25dc9b072","name":"8 AWG THHN STRAND GREEN","qty":75,"uom":"Foot"},{"id":"c3371bc8-742c-45c6-9399-208f91e957ae","productId":"1599247f-2c31-4ecb-97ce-0e5ccddb3c05","name":"Homeline 2 pole 100A Breaker","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaypsclr3","inflowId":"889b7381-9fb9-4e2a-9692-8b1bd08ac954","so":"SO-000986","customer":"Eco Tech","note":"He wants this when they come in","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"5b81ba2c-1700-436f-9b6a-9cba266e191a","productId":"16e4b59a-1e81-43a3-8789-2d02acadd389","name":"Koor 12KW Off Grid Inverter WO/Breakers","qty":1,"uom":"Each"},{"id":"34915eaa-a3bb-4419-a904-582aff6888eb","productId":"e083f7f6-a8b7-48d6-a64f-d42bbfa228fd","name":"Koor Stackable 16kwh Expansion Module (314Ah)","qty":3,"uom":"Each"},{"id":"91c2c635-a618-421c-bd4c-986b4de93f18","productId":"64fd2642-8d64-430d-ad8d-0df00341712a","name":"Koor 12KW Off-Grid 120V/240V Inverter W/Breaker","qty":3,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaylqwlp8","inflowId":"727b212b-018e-4a08-8928-6521875b30fd","so":"SO-000992","customer":"David Eash","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-19","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"a822bed7-c346-46e6-b3f9-905adf4c3faf","productId":"16e4b59a-1e81-43a3-8789-2d02acadd389","name":"Koor 12KW Off Grid Inverter WO/Breakers","qty":1,"uom":"Each"},{"id":"a716d614-6dcf-45e7-a4e9-e2eeb1e14ecd","productId":"7dac9c66-d118-4d3a-8513-ac294f25d0ae","name":"14 Panel Ground Mount","qty":1,"uom":"Each"},{"id":"2ce4fdb0-6744-49a2-9dbe-d6af323e4ea9","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":14,"uom":"Each"},{"id":"2aa7bb2c-2889-4848-bdab-c46ea966c4e7","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":2,"uom":"Each"},{"id":"d35a2426-d17d-48ec-91a8-0968088992a6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":2,"uom":"Each"},{"id":"6b9b9073-352a-4ba5-9561-676bfa42f6d5","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"1632d0b9-b49f-4a39-8d6a-ef2c819991d9","productId":"c3a518f4-2da8-4463-a1d5-ee9c102c3adf","name":"4 pole 32A DC Switch IMO Breakers","qty":1,"uom":"Each"},{"id":"2e296b0b-a4cd-436b-91f9-bbedbb880510","productId":"fcc3f17b-b24c-4136-ab60-ef4f2fc8c47e","name":"URD Wire- ALUM URD 2-2-2-4 DYKE","qty":170,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaxoti3j0","inflowId":"c2a20c5d-02cd-47e2-88c0-b40fc96a2cbe","so":"SO-000975-1","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"84ebcffc-b5f5-4d1d-881f-82f0063c1b33","productId":"0f1b86cc-87e0-45c5-9c8a-850a3a6944c5","name":"10/4 SJOOW Portable Cord 300V UL/CSA Generator cord","qty":10,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaxsf4y13","inflowId":"eb16b79b-5a59-4499-b02b-ea6e1a4d2751","so":"SO-000975-2","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"89db7bd5-bdca-47bd-b82c-9817c7fd73c0","productId":"c3948534-f349-44ea-b039-c7ffb89d6273","name":"10/3 Type NM-B Cable with Ground Wire","qty":85,"uom":"Foot"},{"id":"7a131f78-b225-49ff-9707-f15ad8dc1db3","productId":"0f1b86cc-87e0-45c5-9c8a-850a3a6944c5","name":"10/4 SJOOW Portable Cord 300V UL/CSA Generator cord","qty":10,"uom":"Foot"},{"id":"1e40512a-a766-4582-ba82-b14ff58d13ef","productId":"72ca6da6-477c-4e9a-87a4-e6f5b45f06da","name":"2 gang RACO 4 in Galvanized Steel Square Electrical Box","qty":1,"uom":"Each"},{"id":"ef259bec-6e20-445d-ae36-7180f83e3fe6","productId":"ddfc01ac-0239-4f68-92bb-3bc4f32ea018","name":"4 in Square Cover Exposed Work 1 gang","qty":1,"uom":"Each"},{"id":"b3fcf1db-2c2c-4623-afab-c4c0120f76c0","productId":"a941a270-11fa-4672-a7ea-094d6863a2d3","name":"Misc","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax9h972f","inflowId":"a8aca891-0657-4da7-9161-27615fd0268a","so":"SO-000978","customer":"Jerry Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"9e54ae18-4dc5-45a6-bf30-a782055ede9c","productId":"85e61890-2196-4a22-b111-f453ca9df135","name":"LED 8 Foot. 150 W 19,000LM; 6000K Cold White Linkable Shop Tube Light","qty":5,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kayu0rc8y","inflowId":"27a6533d-efc4-4df6-8026-513581eb6238","so":"SO-000979","customer":"Matt Stutzman","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-18","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"be87fdb7-a8c4-4b88-8db8-f62275b61841","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":156,"uom":"Foot"},{"id":"ecde106b-9020-4e0b-abdf-810ac09c2f28","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":156,"uom":"Foot"},{"id":"a8ed8ecd-3054-435b-9382-ff94bbee9497","productId":"46446a7c-a790-4f11-bf9c-8e5de02678aa","name":"Sunrise Delivery Shipping","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxz8ajdx","inflowId":"2cf3f3ee-786f-4778-a835-ade7340f249d","so":"SO-000941","customer":"Vernon E Yoder","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"d654d52b-a129-4c85-b4e3-1e845c5b4415","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":2,"uom":"Each"},{"id":"af619823-1e72-4e13-8cfb-559e1878f990","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":4,"uom":"Each"},{"id":"9ef618c7-726e-4eec-b21a-74449d294d94","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":2,"uom":"Each"},{"id":"15d5fccf-efcb-446b-965a-e04d4320e03c","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"f2c34892-3628-4e32-94e3-4c30b5d1e566","productId":"d9d44100-27b8-41c0-bf95-b2b0706aa54d","name":"SINCLAIR SEASON ADJUSTABLE JACK","qty":2,"uom":"Each"},{"id":"5d119d65-6e23-43c9-96d7-96ff83998224","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":4,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxyd52x2","inflowId":"008314cb-30f1-4e07-8452-c7e29080ae1b","so":"SQ-000394","customer":"Alton mast","note":"The max is 8 & 4 is the min on the solar panels Add 48V-24V 30A step down converter + 6-way fuse block, mounted on the FRP kit board. 50 ft PV wire (red+black) run to inverter. Customer name corrected to ALTON Mast (earlier emails mistakenly said Eldon). NOTE: order not yet picked/fulfilled in inFlow (inventoryStatus still unfulfilled) -- war...","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":true,"hasLabor":false,"lines":[{"id":"74bc4882-4a72-4a04-b28c-627aecfc179b","productId":"38729847-883d-4c15-9b44-56ce8c70b4bc","name":"Kit","qty":1,"uom":"Each"},{"id":"45f745fa-8865-4822-b670-eae89eeabebf","productId":"0089344e-275e-4863-81fe-d982e49b75e1","name":"Battery Charger 48V 25A Charger","qty":1,"uom":"Each"},{"id":"38880df4-cb5b-4fd0-b217-22b5ebe47e35","productId":"cb43b282-6144-40e4-80f6-2fc4df885059","name":"SRNE ASP4865U140-H 6.5KW 48V Off-Grid Inverter","qty":1,"uom":"Each"},{"id":"6dba4ce0-de73-4400-8da1-4d47047c9e1d","productId":"6d7db8d9-da79-4dbb-aae5-10112bd0ce9e","name":"MidNite Surge Protector 300 VAC","qty":1,"uom":"Each"},{"id":"81d500b2-a625-4825-b13c-85f135230419","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":1,"uom":"Each"},{"id":"6943e142-8608-4944-8d63-8fc3b7063083","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":4,"uom":"Each"},{"id":"22e72373-f77d-4f09-9385-b99b18949bc3","productId":"cbb9f786-722c-459a-b3df-da2b4dd64431","name":"P-rail for 620w panel 179 in","qty":2,"uom":"Each"},{"id":"12501231-3a99-4cf5-bb06-90e557f0d974","productId":"db64d819-d767-4c31-92dd-250598cb9889","name":"P-Rail 79 3/4 in front angle for 620W","qty":4,"uom":"Each"},{"id":"a7700bd5-3c8c-4b24-baa3-dae0cea4ae0c","productId":"2b461568-7193-4ac8-9c13-13235432b986","name":"P-Rail 34 in back leg 2 hole 1 1/2 in angle","qty":1,"uom":"Each"},{"id":"c081fa4a-c74f-4629-8c33-389524e467ae","productId":"83991dac-5c7c-4ea4-a292-324ce9d75f56","name":"P-Rail L foot bracket 2x2","qty":8,"uom":"Each"},{"id":"43069f8f-1d33-4321-8f87-657e9ede68b8","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":16,"uom":"Each"},{"id":"f0ba1e1a-997e-48e4-9309-cf4282b15f73","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":16,"uom":"Each"},{"id":"f6307c8d-7d73-4632-b74a-0e680e383f7a","productId":"df80f314-7364-4741-9072-b222f2ce045a","name":"5/16 X 2 1/2 Hex Lag Screw Stainless Steel","qty":8,"uom":"Each"},{"id":"3493551a-fbd7-4b15-a866-12df02f201c4","productId":"bbb8d982-2d76-462f-aa6b-7973f6f17d9a","name":"5/16-18 Serrated Flange Nut 18/8 Stainless Steel","qty":12,"uom":"Each"},{"id":"c892ead6-1328-4339-8f91-d23ee2a20549","productId":"230ed4bc-2d39-4a06-9ee8-689ae1fbaeb0","name":"5/16-18 X 1 Hex Cap Screw 18/8 Stainless Steel","qty":12,"uom":"Each"},{"id":"d96b0fb2-c0d0-44f0-a48f-e44671526295","productId":"50ba81b0-f3cb-43ee-9efd-7741bac2a8c6","name":"K2 T-Bolt Kit, 13x25mm Bolt w/Flange Nut","qty":8,"uom":"Each"},{"id":"24a6ed01-ee81-4ec0-86cb-51d6f0a81899","productId":"3de3b149-bdc3-4ad4-81c0-3e5c7b213505","name":"48V Step Down to 24V 30A 720W Voltage Reducer Converter","qty":1,"uom":"Each"},{"id":"67ff9bb9-e854-4c2d-af7b-50bdf0f76211","productId":"5296aad9-65cf-47a5-b334-11b25c5677f7","name":"12 V Fused Block 6-Way Wupp","qty":1,"uom":"Each"},{"id":"09de9170-3643-44d5-9753-8f2d07e307e8","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":50,"uom":"Foot"},{"id":"9473ec75-428b-4290-a88b-55b3fead525b","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":50,"uom":"Foot"},{"id":"e5a169b9-506a-40d7-9d8c-93c4bf22409b","productId":"6c9f2ce7-d018-466c-a750-f5308258d44c","name":"6 AWG Bare Copper Stranded ground wire","qty":30,"uom":"Feet"},{"id":"6a0b67ae-6eb3-4540-833b-1860870fb24b","productId":"e083f7f6-a8b7-48d6-a64f-d42bbfa228fd","name":"Koor Stackable 16kwh Expansion Module (314Ah)","qty":1,"uom":"Each"},{"id":"633cdd16-ca87-488e-a79e-c5af0538b82e","productId":"a6da9d35-826c-4440-8bb1-aecee423855a","name":"Koor Smart Hub (PDU) w/ 4.3 in Touch Screen","qty":1,"uom":"Each"},{"id":"cd8a5f0f-5746-4f6d-84eb-c4cbe7f9866d","productId":"cf2a0e18-2913-444b-8d26-ef63d506083e","name":"Koor Structural Base","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax46gpyb","inflowId":"7c405cb9-a0cf-40b3-b946-ae9548479fd1","so":"SO-000943","customer":"Elmer Mast","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-08-12","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"62846a29-1ca8-4d0a-a609-79220a008c07","productId":"c283a614-6183-4fed-8473-d7c4d3d092c0","name":"10/3 Type UF-B Cable with Ground Wire","qty":90,"uom":"Foot"},{"id":"e3348ed3-6981-42fa-b492-8aa9ea4d8422","productId":"0d46a896-58ac-4c21-8592-580defd52bbc","name":"30 A plug 125/250 Male","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxskszse","inflowId":"45b1d54c-1cd5-410d-b4dc-a7c8e75f0b70","so":"SO-000892","customer":"Tobacco River Solar","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-07-31","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"42959b65-02c3-4e2e-a651-4534982f890a","productId":"22d06a37-5233-4629-a92f-0c5129a12e7e","name":"Delta 3 MAX PLUS (2048wh)","qty":1,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kawcg82qw","inflowId":"03ec8f3c-79d6-4263-9713-a479a6381b95","so":"SO-000890","customer":"Simple Techniques","note":"CUSTOMER PICKUP - Lester's own driver will pick up at the shop, target within the next 2 weeks. Do NOT book freight. Send these out WITH the SO-000868 pickup. After this order ships the Mate Solar 430W product is being retired (count reconciled to 0 and product deactivated).","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"3f247266-6ead-4d32-a87f-5e623aad776a","productId":"315658d1-0a64-4f61-8498-bda5b917c817","name":"Mate Solar 430W All-Black Bifacial Solar Panel","qty":40,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kaxas3hye","inflowId":"3eea04a9-d323-4624-aa30-4b1cd4bbb6dc","so":"SO-000885","customer":"Lug Off-grid","note":"He will confirm","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"wholesale","scheme":"Wholesale","hasKit":false,"hasLabor":false,"lines":[{"id":"8bd5c578-e962-40a5-b009-4c473f573a94","productId":"1a35f7ac-8482-4083-a86b-343a856b017f","name":"Pytes V16 Wall Mount 48V 314 Ah LiFePO4 Battery Pack","qty":2,"uom":"Each"},{"id":"39b2a86e-2faf-4bc5-a3c9-07c3aa9490a6","productId":"9698e459-0af7-4123-be80-9ca09fa27aa8","name":"MidNite Surge Protector 600 VDC","qty":6,"uom":"Each"},{"id":"f98263ce-b59d-481d-91b2-3c396e14fd5c","productId":"8c69037f-3357-4d40-b8e0-110af5afdde1","name":"Sol-Ark 12K-2P-LL Hybrid Inverter","qty":2,"uom":"Each"},{"id":"131cffb8-88c7-4c38-a317-2b10c67d5124","productId":"05925a2e-c036-4215-9220-c630de56d219","name":"Br Solar Panel 455W Black on Black Bi-Facial","qty":6,"uom":"Each"},{"id":"281cc740-9972-404b-8dc4-ab2e4c25901f","productId":"035e134e-3127-4556-b23d-74dea23c25c4","name":"620 W Boviet Solar Panel B-Grade","qty":14,"uom":"Each"},{"id":"5a500f29-ac5c-41a6-9bf4-cfb0b530dc55","productId":"73442961-1925-4261-81f8-ac3f5d38d7f1","name":"Sinclair 174 in (4X9) C-CHANNEL","qty":2,"uom":"Each"},{"id":"a5a42132-0fca-421f-95eb-54be8fc74e54","productId":"eedf7f5f-c179-4bb9-98b1-dd821b292b6a","name":"Sinclair .130 ANGLE STRUT-40 (5-35 DEG)","qty":2,"uom":"Each"},{"id":"561d5d7d-fe3e-4bc9-8bea-e35937b06d6d","productId":"26e8435e-7e5f-43de-96c0-7f054b72b70b","name":"Sinclair 186 in Z-PURLIN","qty":4,"uom":"Each"},{"id":"6f7a6e7d-de97-47f3-8cd9-f25784e46dd0","productId":"8da0ddda-f570-4e4b-a67d-351b447baffd","name":"Sinclair 52 in East Z-PURLIN","qty":4,"uom":"Each"},{"id":"7f16979a-1467-4d45-89e1-0afd3d0be45c","productId":"7eab03b6-3374-485b-9e66-7dc683c57f38","name":"Sinclair 52 in West Z-PURLIN racking","qty":4,"uom":"Each"},{"id":"48aef992-25d5-47dd-bee6-7df00c6b1a44","productId":"a4293c67-dff3-49ec-b092-048b5ae2f78e","name":"SINCLAIR ASSEMBLY HDW KIT - 14","qty":3,"uom":"Each"},{"id":"b09ce1da-a29f-4c12-9d88-7159c178b312","productId":"3e4687d5-6206-478b-bd51-38f328bdfcd0","name":"Sinclair TRUSS-CUSTOM DIRECT TIE","qty":2,"uom":"Each"},{"id":"7e828fbf-3372-407a-afb4-dc7479467830","productId":"c8db07ac-2110-401f-a7e3-6c9ed57b0b5f","name":"1/4- 20x 3/4 Serrated Flange Bolt","qty":144,"uom":"Each"},{"id":"c816c1c2-73fc-44a4-8a06-a9441f11387b","productId":"609a4361-6757-4901-b01a-cbf17bca878d","name":"1/4-20 Serrated Flange Nut 18/8 Stainless Steel","qty":144,"uom":"Each"},{"id":"ecb34042-896f-43ad-8e05-ee73415d099e","productId":"bc663de7-6dc0-4832-ab50-7ad45d6783bb","name":"Solar Panel Shipping Skid","qty":1,"uom":"Each"},{"id":"e5dcb036-8f73-4ab0-abb7-21bd73403fa5","productId":"70869b5c-b2d1-48ef-a491-204ab09e6d74","name":"10 Awg PV Wire Red","qty":1000,"uom":"Foot"},{"id":"d6169780-9923-48fa-aa71-9a61138db639","productId":"580c111c-2b73-411d-abbf-c3031b22ce3d","name":"10 Awg, PV Wire Black","qty":1000,"uom":"Foot"},{"id":"e8fa9b68-1f53-4f4b-b7bd-bb4f7d3081f0","productId":"bdff2176-2a23-4784-a397-7bce226bcee4","name":"K2 Racking Kit MiniRail, 17 in Rail/Bracket w/Everseal,","qty":34,"uom":"Each"},{"id":"56827104-d879-4b7a-892f-fe20a27d7b3f","productId":"8e8f9b64-98b3-4c58-afb2-439870a2db7e","name":"K2 cross clamp dark","qty":34,"uom":"Each"},{"id":"0341a671-6ebd-40fa-bd8b-8d4beb3d004b","productId":"bf838919-1812-488b-8fa8-2edc9cf07866","name":"K2 Ground Clamp","qty":3,"uom":"Each"}],"dupOf":[]},{"id":"o_mtab1kax98b4eu","inflowId":"f4a62293-2635-4af8-9cab-9704c91a6ff0","so":"SO-000891","customer":"Yoder, Nate","note":"Job: NATE YODER - 67744 Co Rd 37, Millersburg IN 46543. Site contact Nate . Ordered 180 ft; All Phase only sells this by the 250 ft factory coil, so the full coil ships and the full coil gets billed. Measure the actual leftover - do not assume 70 ft. Process as a Return on this order so he is credited and the footage comes back into stock. ***","status":"open","createdAt":1787761508360,"orderDate":"2026-07-30","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":false,"lines":[{"id":"5cee7ad0-2d06-409d-8820-398393a92939","productId":"ec2d5866-19df-4d5a-bbdd-fc6ec5d1a066","name":"UF Type Wire 10/2 Direct Burial UF-B Cable","qty":250,"uom":"Foot"}],"dupOf":[]},{"id":"o_mtab1kaw9m3hoo","inflowId":"ea25c8bc-db0b-4b91-898f-b8237c4392e5","so":"SO-000877","customer":"Galen Miller","note":"","status":"open","createdAt":1787761508360,"orderDate":"2026-07-29","tier":"retail","scheme":"Retail","hasKit":false,"hasLabor":true,"lines":[{"id":"34229f44-4b60-4965-a4d3-7003f602571d","productId":"35e6fa19-f977-4ec9-aa2c-68be9f178227","name":"6 AWG 3/8 Battery Lugs w/ Heat Shrink Tubing","qty":1,"uom":"packs"}],"dupOf":[]},{"id":"o_mtagfketgphasq","trackerId":"INST-2026-019","src":"tracker","so":"INST-2026-019","customer":"Lamar J Bontrager","note":"Scheduled: July 23, 2026 (Thursday). Site: Goshen, IN. Solar panel install.","status":"open","createdAt":1787770559764,"orderDate":"2026-07-23","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfket4n172j","trackerId":"INST-2026-020","src":"tracker","so":"INST-2026-020","customer":"LaVere Stump","note":"Scheduled: July 21, 2026 (Tuesday). Site: Quince Rd Culver, IN. Trenching.","status":"open","createdAt":1787770559764,"orderDate":"2026-07-21","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketavb2og","trackerId":"INST-2026-017","src":"tracker","so":"INST-2026-017","customer":"Jeremy L Frey","note":"Scheduled: July 3, 2026 (Friday). Site: Shipshewana, IN. Deliver & install WiFi monitoring dongle on Jeremy’s EG4 6000XP off-grid system so it reports to the EG4 monitor portal — enables remote diagnosis of the ~15-sec total power loss he had while running a mixer (then auto-recovered).","status":"open","createdAt":1787770559764,"orderDate":"2026-07-03","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketto2bhe","trackerId":"INST-2026-014","src":"tracker","so":"INST-2026-014","customer":"Elmer Mast","note":"Scheduled: By Fri, Jun 26. Site: Shipshewana, IN. Diagnose why the basement circuit is not live — troubleshoot dead circuit / restore power.","status":"open","createdAt":1787770559764,"orderDate":"2026-06-26","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]},{"id":"o_mtagfketu19t2h","trackerId":"INST-2026-015","src":"tracker","so":"INST-2026-015","customer":"Jonas Jr. Miller","note":"Scheduled: Fri, Jun 26, 2026. Site: Syracuse, IN. Install generator contactor.","status":"open","createdAt":1787770559764,"orderDate":"2026-06-26","tier":"retail","scheme":"","hasKit":false,"hasLabor":true,"lines":[],"dupOf":[]}],"entries":[],"picks":{},"aside":{}}</script>
 <script id="app-src">
 /* ============================================================
    Fantastech Shop Floor Clock
@@ -526,7 +530,7 @@ var App = (function () {
   L.groupCounts = function (state) {
     var c = { all: 0, job: 0, kit: 0, wholesale: 0, retail: 0 };
     state.orders.forEach(function (o) {
-      if (o.status !== "open") return;
+      if (o.status !== "open" || L.isAside(state, o)) return;
       c.all++; c[L.groupOf(o)]++;
     });
     return c;
@@ -631,7 +635,11 @@ var App = (function () {
     var q = L.norm(rawQuery);
     if (!q) return { query: rawQuery, matched: true, results: [], closest: false };
     var pool = state.orders.filter(function (o) {
-      return opts.includeDone ? true : o.status === "open";
+      if (opts.includeDone) return true;
+      // A set-aside order still answers a search. That is how somebody who
+      // needs it back finds it - it is off the board, not gone.
+      if (L.isAside(state, o)) return opts.includeAside !== false;
+      return o.status === "open";
     });
     var scored = pool.map(function (o) {
                        var r = L.score(state, o, rawQuery);
@@ -735,6 +743,7 @@ var App = (function () {
     (incoming || []).forEach(function (inc) { if (inc && inc.inflowId) sent[inc.inflowId] = 1; });
     var dropped = 0;
     s.orders = s.orders.filter(function (o) {
+      if (o.src === "tracker") return true;                   // the tracker owns these
       if (!o.inflowId || sent[o.inflowId]) return true;      // hand-added, or still sent
       var busy = s.entries.some(function (e) { return e.orderId === o.id; });
       var ticked = L.linesOf(o).some(function (l) { return L.pickState(s, l.id); });
@@ -795,7 +804,11 @@ var App = (function () {
     // No pricing reaches the crew. An inFlow remark often carries quote
     // history with dollar figures on it; drop those sentences and keep the
     // build instructions, which is the part a picker actually needs.
-    var money = /[$\u00a3\u20ac]\s?\d|\bUSD\b|\bprice[sd]?\b|\bcost\b|\btotal\b/i;
+    // "cost"/"total" only count as money next to a money-SHAPED number.
+    // "~15-sec total power loss" is a fault report the crew needs to read;
+    // "$15,199" is a quote they must never see. This rule lives in three
+    // places - here, the feed builder, and the morning sync. Keep them equal.
+    var money = /[$\u00a3\u20ac]\s?\d|\bUSD\b|\bpric(?:e|es|ed|ing)\b|\bquot(?:e|es|ed)\b|\binvoice[sd]?\b|\bdeposit\b|\bmsrp\b|\bmargin\b|\bper unit\b|\b(?:cost|costs|total|totals|subtotal|amount|balance)\b[^.!?]{0,40}(?:\d[\d,]*\.\d{1,2}|\d{1,3}(?:,\d{3})+|\d{3,})(?![\w])|(?:\d[\d,]*\.\d{1,2}|\d{1,3}(?:,\d{3})+|\d{3,})(?![\w])[^.!?]{0,40}\b(?:cost|costs|total|totals|subtotal|amount|balance)\b/i;
     t = t.split(/(?<=[.!?])\s+|\s*\|\|\s*|\s*\|\s*/)
          .filter(function (x) { return x && x.trim() && !money.test(x); })
          .map(function (x) { return x.trim(); })
@@ -805,6 +818,162 @@ var App = (function () {
       .replace(/\s*\/\s*(?=[).,]|$)/g, "")
       .replace(/\s{2,}/g, " ")
       .replace(/^[\s\-\/,]+|[\s\-\/,]+$/g, "");
+  };
+
+  /* ---------- install jobs off the job tracker ----------
+     These are NOT inFlow sales orders. They come from
+     derek771.github.io/fantastech-install-tracker and there is nothing to
+     pick on them - they are labour, so the crew can clock onto an install
+     the same way they clock onto an order. Marked src:"tracker" so a sync
+     manages them separately from inFlow orders and from anything typed
+     straight onto the board by hand.
+     ------------------------------------------------------------------- */
+  L.mergeTracker = function (state, jobs, now) {
+    var s = clone(state);
+    var seen = {};
+    var added = 0, updated = 0, dropped = 0;
+
+    // A sales order already carries its own labour line. If the tracker
+    // points at one, inFlow is the better copy and we leave it alone rather
+    // than putting the same job on the board twice.
+    var soOnBoard = {};
+    s.orders.forEach(function (o) {
+      if (o.inflowId && o.so) soOnBoard[String(o.so).trim().toUpperCase()] = 1;
+    });
+
+    (jobs || []).forEach(function (j) {
+      if (!j || !j.id) return;
+      if (j.status === "completed" || j.status === "archived") return;
+      if (j.linkedSo && soOnBoard[String(j.linkedSo).trim().toUpperCase()]) return;
+      seen[j.id] = 1;
+      var ex = null;
+      for (var i = 0; i < s.orders.length; i++) {
+        if (s.orders[i].trackerId === j.id) { ex = s.orders[i]; break; }
+      }
+      if (!ex) {
+        s.orders.push({
+          id: uid("o"), trackerId: j.id, src: "tracker",
+          so: String(j.id || "").trim(),
+          customer: String(j.name || "").trim(),
+          note: L.scrubNote(j.note || (j.sched ? "Scheduled: " + j.sched : "")),
+          status: "open", createdAt: now,
+          orderDate: j.orderDate || null,
+          tier: "retail", scheme: "", hasKit: false,
+          hasLabor: true,                 // an install is labour by definition
+          lines: [], dupOf: []
+        });
+        added++;
+        return;
+      }
+      if (j.name && ex.customer !== j.name) { ex.customer = j.name; updated++; }
+      if (j.orderDate) ex.orderDate = j.orderDate;
+      ex.hasLabor = true;
+      var note = L.scrubNote(j.note || (j.sched ? "Scheduled: " + j.sched : ""));
+      if (note && ex.note !== note) { ex.note = note; updated++; }
+    });
+
+    // A job the tracker no longer lists as active is finished or archived.
+    // Same protection as an order: never remove one somebody worked on.
+    s.orders = s.orders.filter(function (o) {
+      if (o.src !== "tracker") return true;
+      if (seen[o.trackerId]) return true;
+      var busy = s.entries.some(function (e) { return e.orderId === o.id; });
+      if (busy) return true;
+      dropped++;
+      return false;
+    });
+
+    s.orders.sort(function (a, b) { return L.orderWhen(b) - L.orderWhen(a); });
+    return { state: s, added: added, updated: updated, dropped: dropped };
+  };
+
+  /* ---------- setting an order aside ----------
+     A dead order - cancelled, entered twice, or never going to ship - gets
+     taken off the board so nobody picks it or clocks onto it.
+
+     This is a BOARD decision only. It does NOT touch inFlow. inFlow stays
+     the system of record and a phone in the shop has no business cancelling
+     a customer's sales order in it. What this does is stop the order showing
+     up in front of the crew.
+
+     It is shared with every phone - it rides in the shop's store beside the
+     punches and the ticks - and it is reversible: "Put it back" undoes it.
+
+     Keyed by the inFlow id (or the tracker id), never the board's own row
+     id, so the decision survives the morning rebuild of the page.
+     ------------------------------------------------------------------- */
+  // What this order IS, so a screen can name it without lying. An install
+  // off the tracker is not a sales order and inFlow has never heard of it.
+  L.homeOf = function (o) {
+    return (o && o.src === "tracker") ? "the install tracker" : "inFlow";
+  };
+
+  L.orderKey = function (o) {
+    if (!o) return "";
+    return String(o.inflowId || o.trackerId || o.id || "");
+  };
+  L.asideState = function (state, o) {
+    var k = (typeof o === "string") ? o : L.orderKey(o);
+    var r = state && state.aside && state.aside[k];
+    return (r && r.on) ? r : null;
+  };
+  L.isAside = function (state, o) { return !!L.asideState(state, o); };
+
+  // A decision with a time on it, exactly like a pick tick: the newest
+  // decision wins, so two phones can never fight over one order.
+  L.setAsideKey = function (state, key, workerId, on, now) {
+    var s = clone(state);
+    if (!key) return s;
+    if (!s.aside) s.aside = {};
+    var was = s.aside[key];
+    if (was && was.at > now) return s;          // somebody decided later
+    s.aside[key] = { on: !!on, by: workerId || null, at: now };
+    return s;
+  };
+  L.setAside = function (state, orderId, workerId, on, now) {
+    var o = L.findOrder(state, orderId);
+    if (!o) return clone(state);
+    return L.setAsideKey(state, L.orderKey(o), workerId, on, now);
+  };
+
+  // Never let an order be set aside out from under somebody who is on the
+  // clock for it. Stop the timer first.
+  L.asideBlocked = function (state, orderId) {
+    return state.entries.some(function (e) {
+      return e.orderId === orderId && e.stop === null;
+    });
+  };
+
+  // What a picker should actually be looking at: open, and not set aside.
+  L.liveOrders = function (state) {
+    return state.orders.filter(function (o) {
+      return o.status === "open" && !L.isAside(state, o);
+    });
+  };
+  L.asideOrders = function (state) {
+    return state.orders.filter(function (o) { return L.isAside(state, o); });
+  };
+  // NOTE: there is deliberately no prune for these. An inFlow id is a uuid
+  // and is never handed out twice, so a leftover record costs a few bytes
+  // and can never attach itself to a different order - while a prune run
+  // against a stale order list could throw away a live decision.
+
+  // Duplicate warnings, minus any partner somebody has already dealt with.
+  // Once the repeat is off the board there is nothing left to warn about,
+  // and a warning nobody can act on is a warning the crew learns to ignore.
+  L.liveDups = function (state, o) {
+    var d = (o && Array.isArray(o.dupOf)) ? o.dupOf : [];
+    if (!d.length) return [];
+    return d.filter(function (x) {
+      var partner = null;
+      for (var i = 0; i < state.orders.length; i++) {
+        if (String(state.orders[i].so || "") === String(x.so || "")) { partner = state.orders[i]; break; }
+      }
+      // A warning is a safety net. It only comes down when somebody has
+      // plainly dealt with the other order - not because we cannot find it.
+      if (!partner) return true;
+      return !L.isAside(state, partner);
+    });
   };
 
   L.setOrderStatus = function (state, orderId, status) {
@@ -831,12 +1000,19 @@ var App = (function () {
     if (op.kind === "pick") {
       return L.setPick(state, op.lineId, op.workerId, op.on, op.at);
     }
+    if (op.kind === "aside") {
+      return L.setAsideKey(state, op.key, op.workerId, op.on, op.at);
+    }
     return state;
   };
   L.opLanded = function (state, op) {
     if (op.kind === "pick") {
       var p = state.picks && state.picks[op.lineId];
       return !!p && p.at >= op.at;        // this decision, or a newer one, is in
+    }
+    if (op.kind === "aside") {
+      var r = state.aside && state.aside[op.key];
+      return !!r && r.at >= op.at;        // this decision, or a newer one, is in
     }
     var e = L.findEntry(state, op.entryId);
     if (op.kind === "in") return !!e;
@@ -903,7 +1079,7 @@ var App = (function () {
     var base;
     try { base = JSON.parse(document.getElementById("app-state").textContent); }
     catch (x) { base = null; }
-    if (!base) base = { v: 4, settings: {}, workers: [], orders: [], entries: [], picks: {} };
+    if (!base) base = { v: 4, settings: {}, workers: [], orders: [], entries: [], picks: {}, aside: {} };
 
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem(LOCAL) || "null"); } catch (x) {}
@@ -912,6 +1088,7 @@ var App = (function () {
       // always newer than a cached one, so it wins.
       if (Array.isArray(cached.entries)) base.entries = cached.entries;
       if (cached.picks && typeof cached.picks === "object") base.picks = cached.picks;
+      if (cached.aside && typeof cached.aside === "object") base.aside = cached.aside;
       if (typeof cached.__version === "number") store.version = cached.__version;
     }
     return migrate(base);
@@ -920,7 +1097,8 @@ var App = (function () {
   function cacheLocally(state) {
     try {
       localStorage.setItem(LOCAL, JSON.stringify({
-        entries: state.entries, picks: state.picks, __version: store.version
+        entries: state.entries, picks: state.picks, aside: state.aside,
+        __version: store.version
       }));
     } catch (x) {}
   }
@@ -928,10 +1106,15 @@ var App = (function () {
   // Lay the shop's copy of the work over ours, then put back anything this
   // device is still holding. Never the other way round - the store wins, and
   // our own unsent taps are re-applied on top.
-  function adopt(serverEntries, serverPicks, version) {
+  function adopt(serverEntries, serverPicks, serverAside, version) {
     var next = clone(S);
     next.entries = Array.isArray(serverEntries) ? serverEntries : [];
     next.picks = (serverPicks && typeof serverPicks === "object") ? serverPicks : {};
+    // A store that has never heard of the shelf sends nothing here. That is
+    // "no opinion", NOT "empty" - treating it as empty would put every set
+    // aside order back on the board on the next poll.
+    if (serverAside && typeof serverAside === "object") next.aside = serverAside;
+    else if (!next.aside) next.aside = {};
     readPending().forEach(function (op) {
       if (!L.opLanded(next, op)) next = L.applyOp(next, op);
     });
@@ -963,10 +1146,12 @@ var App = (function () {
     b.orders.forEach(function (o) { delete o.matCost; delete o.sellPrice; delete o.costGaps; });
     b.entries.forEach(function (e) { delete e.rate; });
     if (!b.picks || typeof b.picks !== "object") b.picks = {};
+    if (!b.aside || typeof b.aside !== "object") b.aside = {};
     // This board is a shop-floor screen. A customer's email address or phone
     // number has no business on a picking list, wherever the note came from.
     b.orders.forEach(function (o) { o.note = L.scrubNote(o.note); });
     b.orders.forEach(function (o) { if (!Array.isArray(o.lines)) o.lines = []; });
+    b.orders.forEach(function (o) { if (!Array.isArray(o.dupOf)) o.dupOf = []; });
     b.v = 4;
     return b;
   }
@@ -997,6 +1182,7 @@ var App = (function () {
     var forPage = clone(state);
     forPage.entries = [];
     forPage.picks = {};
+    forPage.aside = {};
     state = forPage;
 
     return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
@@ -1055,7 +1241,7 @@ var App = (function () {
 
     var body = JSON.stringify({
       version: store.version, by: me || "",
-      entries: state.entries, picks: state.picks
+      entries: state.entries, picks: state.picks, aside: state.aside
     });
     return fetch(BACKEND, {
       method: "POST",
@@ -1073,7 +1259,7 @@ var App = (function () {
         if (d && d.conflict) {
           // Somebody saved first. Take their copy, put our own taps back on
           // top, and the caller sends again.
-          adopt(d.entries, d.picks, d.version);
+          adopt(d.entries, d.picks, d.aside, d.version);
           return { ok: false, code: "conflict" };
         }
         return { ok: false, code: (d && d.error) || "upstream_error" };
@@ -1091,7 +1277,7 @@ var App = (function () {
         if (!d || !d.ok) return false;
         store.lastSeen = Date.now();
         if (d.version === store.version) return false;      // nothing new
-        adopt(d.entries, d.picks, d.version);
+        adopt(d.entries, d.picks, d.aside, d.version);
         cacheLocally(S);
         return true;
       })
@@ -1251,12 +1437,12 @@ var App = (function () {
 
   function dupNote() {
     var dups = S.orders.filter(function (o) {
-      return o.status === "open" && o.dupOf && o.dupOf.length;
+      return o.status === "open" && !L.isAside(S, o) && L.liveDups(S, o).length;
     });
     if (!dups.length) return "";
     var seen = {}, pairs = [];
     dups.forEach(function (o) {
-      o.dupOf.forEach(function (d) {
+      L.liveDups(S, o).forEach(function (d) {
         var key = [o.so, d.so].sort().join("|");
         if (seen[key]) return;
         seen[key] = 1;
@@ -1290,7 +1476,8 @@ var App = (function () {
 
     var g = L.grand(S, t);
     var mine = L.activeEntry(S, me);
-    var open = S.orders.filter(function (o) { return o.status === "open"; });
+    var open = L.liveOrders(S);
+    var aside = L.asideOrders(S);
     var flags = L.flags(S, t);
     var h = readOnlyNote() + heldNote() + skewNote(t) + dupNote();
 
@@ -1352,9 +1539,13 @@ var App = (function () {
     // ---- not searching: grouped board ----
     h += '<div class="actbar"><button class="mini" data-a="addorder">+ Add an order</button>' +
       '<button class="mini" data-a="toggledone" aria-pressed="' + showDone + '">' +
-      (showDone ? "Hide finished orders" : "Show finished orders") + "</button></div>";
+      (showDone ? "Hide finished orders" : "Show finished orders") + "</button>" +
+      (aside.length
+        ? '<button class="mini" data-a="toggleaside" aria-pressed="' + showAside + '">' +
+          (showAside ? "Hide set aside" : "Set aside (" + aside.length + ")") + "</button>"
+        : "") + "</div>";
 
-    var list = showDone ? S.orders : open;
+    var list = showDone ? S.orders.filter(function (o) { return !L.isAside(S, o); }) : open;
     if (!list.length) {
       h += '<div class="empty"><b>Every order is finished.</b>The next ones load from inFlow in the morning.</div>';
       return h;
@@ -1379,6 +1570,19 @@ var App = (function () {
     if (!shown) {
       h += '<div class="empty"><b>Nothing in this group right now.</b>Tap “All” to see the whole board.</div>';
     }
+
+    // The shelf. Orders somebody took off the board, kept where they can be
+    // seen and put back. Nothing here is deleted and nothing is hidden from
+    // inFlow - this is only what the crew is not being asked to pick.
+    if (showAside && aside.length) {
+      h += '<div class="ghead"><h3>Set aside — not being picked</h3><span>' +
+        aside.length + '</span><div class="rule"></div></div>';
+      h += '<div class="hint" style="margin:-4px 2px 10px">These are still in inFlow ' +
+        "(or on the install tracker) exactly as they were. " +
+        "Setting one aside only takes it off this board.</div>";
+      h += '<div class="cards">' +
+        aside.map(function (o) { return card(o, totals[o.id], mine, t); }).join("") + "</div>";
+    }
     return h;
   }
 
@@ -1389,19 +1593,26 @@ var App = (function () {
     var liveWorkers = S.entries.filter(function (e) { return e.orderId === o.id && e.stop === null; });
     var grp = L.groupOf(o);
 
-    var h = '<div class="card' + (liveWorkers.length ? " on" : "") + (o.status === "done" ? " done" : "") + '">' +
+    var av = L.asideState(S, o);
+    var h = '<div class="card' + (liveWorkers.length ? " on" : "") +
+      (o.status === "done" || av ? " done" : "") + '">' +
       '<div class="crow"><div class="cmain">' +
       '<div class="chiprow">' +
       (o.hasLabor ? '<span class="tchip job">Job</span>' : "") +
       (o.hasKit ? '<span class="tchip kit">Kit build</span>' : "") +
       (L.pickCount(S, o).all ? '<span class="tchip picked">Picked</span>' : "") +
       dupChip(o) +
-      '<span class="tchip' + (o.tier === "wholesale" ? " ws" : "") + '">' +
-        (o.tier === "wholesale" ? "Wholesale" : "Retail") + "</span>" +
+      (o.src === "tracker" ? "" :
+        '<span class="tchip' + (o.tier === "wholesale" ? " ws" : "") + '">' +
+        (o.tier === "wholesale" ? "Wholesale" : "Retail") + "</span>") +
       (o.status === "done" ? '<span class="tchip">Finished</span>' : "") +
+      (av ? '<span class="tchip aside">Set aside</span>' : "") +
       "</div>" +
       (o.so ? '<div class="so">' + esc(o.so) + "</div>" : "") +
       '<div class="cust">' + esc(o.customer || "(no name)") + "</div>" +
+      (av ? '<div class="asideby">Taken off the board by ' +
+            esc(L.workerName(S, av.by) || "somebody") + " \u00b7 " + esc(L.clockText(av.at)) +
+            ". Still on " + esc(L.homeOf(o)) + ".</div>" : "") +
       (o.note ? '<div class="note">' + esc(o.note) + "</div>" : "") +
       '<div class="meta"><span class="lbl">Time on it</span><b>' + L.hoursText(r.ms) + "</b>" +
       '<span class="lbl">Punches</span><b>' + r.entries + "</b></div>" +
@@ -1415,6 +1626,15 @@ var App = (function () {
       "</div>";
 
     h += '<div class="cact">';
+    if (av) {
+      // Off the board. The only thing to offer is the way back.
+      h += '<button class="mini" data-a="unaside" data-id="' + o.id + '">Put it back on the board</button>';
+      if (L.linesOf(o).length) {
+        h += '<button class="mini" data-a="picklist" data-id="' + o.id + '">See the pick list</button>';
+      }
+      h += "</div></div></div>";
+      return h;
+    }
     if (mineHere) {
       h += '<div class="clk"><span class="mono" data-live="' + mine.id + '">' + L.hms(L.elapsed(mine, t)) +
         "</span><small>You are on this</small></div>" +
@@ -1435,6 +1655,7 @@ var App = (function () {
     }
     if (o.status !== "done" && !mineHere) {
       h += '<button class="mini" data-a="finish" data-id="' + o.id + '">Mark finished</button>';
+      h += '<button class="mini" data-a="aside" data-id="' + o.id + '">Set aside</button>';
     }
     h += "</div></div></div>";
     return h;
@@ -1467,9 +1688,10 @@ var App = (function () {
       " &nbsp;&middot;&nbsp; " + (o.tier === "wholesale" ? "Wholesale" : "Retail") +
       " &nbsp;&middot;&nbsp; printed " + esc(L.clockText(now())) + "</div>";
 
-    if (o.dupOf && o.dupOf.length) {
+    var pdups = L.liveDups(S, o);
+    if (pdups.length) {
       h += '<div class="pl-warn">CHECK BEFORE YOU PICK: this looks like ' +
-        o.dupOf.map(function (d) { return esc(d.so) + " (" + d.pct + "% the same)"; }).join(" and ") +
+        pdups.map(function (d) { return esc(d.so) + " (" + d.pct + "% the same)"; }).join(" and ") +
         ". It may be one job entered twice.</div>";
     }
     if (o.note) h += '<div class="pl-note">' + esc(o.note) + "</div>";
@@ -1509,7 +1731,7 @@ var App = (function () {
   // Two orders for the same customer carrying the same stuff. Say so on the
   // card, loudly, before somebody picks the same job twice.
   function dupChip(o) {
-    var d = (o && Array.isArray(o.dupOf)) ? o.dupOf : [];
+    var d = L.liveDups(S, o);
     if (!d.length) return "";
     var names = d.map(function (x) { return esc(x.so); }).join(" and ");
     return '<span class="tchip dup">Looks like ' + names + '</span>';
@@ -1598,6 +1820,7 @@ var App = (function () {
   function orderLabel(o) { if (!o) return "the other order"; return o.so || o.customer || "the other order"; }
 
   var showDone = false;
+  var showAside = false;
   var query = "";
   var group = "all";
 
@@ -1785,6 +2008,68 @@ var App = (function () {
     drawSheet();
   }
 
+  /* ---------- taking an order off the board ----------
+     Deliberately behind a confirm screen. It is a shared decision - it goes
+     to everybody's phone - so it should not happen from a pocket.
+     ------------------------------------------------------------------- */
+  function setAside(orderId, on) {
+    if (!me) { toast("Tap your name first.", true); return; }
+    var o = L.findOrder(S, orderId);
+    if (!o) return;
+    if (on && L.asideBlocked(S, orderId)) {
+      toast("Somebody is on the clock for that one. Stop the timer first.", true);
+      return;
+    }
+    var t = now();
+    var op = { id: uid("op"), kind: "aside", key: L.orderKey(o),
+               workerId: me, on: !!on, at: t };
+    save(L.setAsideKey(S, L.orderKey(o), me, on, t), op);
+  }
+
+  function sheetAside(orderId) {
+    sheet = {
+      html: function () {
+        var o = L.findOrder(S, orderId);
+        if (!o) return "<h3>That order is gone.</h3>" +
+          '<div class="sheetacts"><button class="mini" data-s="cancel">Close</button></div>';
+        var c = L.pickCount(S, o);
+        var r = L.orderTotals(S, now()).filter(function (x) { return x.order.id === o.id; })[0];
+        var h = "<h3>Take " + esc(o.so || o.customer || "this order") + " off the board?</h3>" +
+          "<p><b>" + esc(o.customer || "(no name)") + "</b> \u2014 for an order that is cancelled, " +
+          "entered twice, or not going to ship.</p>";
+        var home = L.homeOf(o);
+        h += '<div class="ro" style="background:var(--surface-2)">' +
+          "<b>This does not touch " + esc(home) + ".</b> The " +
+          (o.src === "tracker" ? "install job" : "sales order") +
+          " stays there exactly as it is. All this does is stop it showing up in " +
+          "front of the crew. Anybody can put it back, and it is on the shelf at " +
+          "the bottom of the board until they do.</div>";
+        if (c.done) {
+          h += '<div class="warn"><div><b>' + c.done + " line" + (c.done === 1 ? " is" : "s are") +
+            " already ticked off on this one.</b><br>Those ticks are kept, and they stay picked in inFlow. " +
+            "Nothing is unpicked by this.</div></div>";
+        }
+        if (r && r.ms > 0) {
+          h += '<div class="warn"><div><b>' + L.hoursText(r.ms) +
+            " is already on the clock for this order.</b><br>Those hours are kept and still count. " +
+            "They keep showing on the Hours tab.</div></div>";
+        }
+        if (L.asideBlocked(S, orderId)) {
+          h += '<div class="warn"><div><b>Somebody is clocked onto it right now.</b><br>' +
+            "Stop that timer first, then set it aside.</div></div>";
+          return h + '<div class="sheetacts"><button class="mini" data-s="cancel">Close</button></div>';
+        }
+        return h + '<div class="sheetacts"><button class="mini" data-s="cancel">Cancel</button>' +
+          '<button class="big" style="height:48px;width:auto" data-s="ok">Take it off</button></div>';
+      },
+      act: function (a) {
+        if (a === "cancel") return closeSheet();
+        if (a === "ok") { closeSheet(); setAside(orderId, true); render(); }
+      }
+    };
+    drawSheet();
+  }
+
   function sheetSwitch() {
     sheet = {
       html: function () {
@@ -1942,6 +2227,9 @@ var App = (function () {
         else if (a === "picklist") sheetPick(id);
         else if (a === "print") printPickList(id);
         else if (a === "toggledone") { showDone = !showDone; render(); }
+        else if (a === "toggleaside") { showAside = !showAside; render(); }
+        else if (a === "aside") sheetAside(id);
+        else if (a === "unaside") { setAside(id, false); render(); }
         else if (a === "group") { group = id; render(); }
         else if (a === "clearq") { query = ""; render(); focusSearch(true); }
         else if (a === "retry") { retriesDone(); flushPending().then(function () { render(); }); }
@@ -1997,6 +2285,10 @@ var App = (function () {
     _pickSheet: function (id) { sheetPick(id); },
     _print: function (id) { printPickList(id); },
     _tick: function (lineId, on) { togglePick(lineId, on); render(); },
+    _setAside: function (id, on) { setAside(id, on); render(); },
+    _asideSheet: function (id) { sheetAside(id); },
+    _in: function (id) { doIn(id); },
+    _out: function () { doOut(); },
     _store: store,
     _pending: readPending,
     _buildDoc: buildDoc
