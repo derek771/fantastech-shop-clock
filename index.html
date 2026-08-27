@@ -1054,9 +1054,23 @@ var App = (function () {
     // when a person picks up the phone. Those are the ones to chase this
     // morning, so they sit top-left. Inside each half, the item holding up
     // the most jobs leads.
+    // Hang the whole pool off each tab: everybody queued on the item, not
+    // just the one left short. jobs[] still means "came up short" - the card
+    // flags and the Waiting group are built off that and must not shift.
+    order.forEach(function (r) {
+      var pool = L.supplyPool(state, r.key);
+      r.want = pool.want;
+      r.covered = pool.covered;
+      r.queue = pool.orders;
+    });
+    // Sorted AFTER the pool is worked out, so the number on the badge runs
+    // down the row instead of jumping about.
     order.sort(function (a, b) {
       var an = a.onOrder ? 1 : 0, bn = b.onOrder ? 1 : 0;
       if (an !== bn) return an - bn;
+      var aq = (a.queue && a.queue.length) || a.jobs.length;
+      var bq = (b.queue && b.queue.length) || b.jobs.length;
+      if (bq !== aq) return bq - aq;
       if (b.jobs.length !== a.jobs.length) return b.jobs.length - a.jobs.length;
       return String(a.name).toLowerCase() < String(b.name).toLowerCase() ? -1 : 1;
     });
@@ -1066,6 +1080,38 @@ var App = (function () {
     return L.liveOrders(state).filter(function (o) {
       return L.waitingOn(state, o).some(function (w) { return w.key === key; });
     });
+  };
+  /* EVERY order queued on an item, not only the one that came up short.
+     Added 2026-08-27 at Emily's call. Before this a tab said "620W Boviet -
+     1 job", when four customers were really queued on the same 41 panels and
+     only the man who ordered LAST got told he was short. That reads as one
+     small problem when it is a pool problem, and it hides who is in front of
+     whom. Now the tab counts everybody on the item and the line underneath
+     says how much of the total is covered. */
+  L.ordersNeeding = function (state, key) {
+    return L.liveOrders(state).filter(function (o) {
+      return L.linesOf(o).some(function (l) { return L.supplyKey(l) === key; });
+    });
+  };
+  // How the whole pool for one item stands: wanted, covered, and who is short.
+  L.supplyPool = function (state, key) {
+    var want = 0, covered = 0, orders = [];
+    L.ordersNeeding(state, key).forEach(function (o) {
+      var q = 0, h = 0, g = 0;
+      L.linesOf(o).forEach(function (l) {
+        if (L.supplyKey(l) !== key) return;
+        var lq = l.qty || 0;
+        var lg = L.pickState(state, l.id) ? 0 : L.lineShort(state, l);
+        var lh = (typeof l.have === "number") ? l.have : Math.max(0, lq - lg);
+        q += lq; h += lh; g += lg;
+      });
+      want += q; covered += h;
+      orders.push({ order: o, qty: q, have: h, short: g });
+    });
+    // Whoever ordered first is in front. Same rule the shortfall was worked
+    // out with, so the list on screen matches the queue on the shelf.
+    orders.sort(function (a, b) { return L.orderWhen(a.order) - L.orderWhen(b.order); });
+    return { want: want, covered: covered, orders: orders };
   };
   // Everything on the shelf, nothing on order, nobody blocked. Go pick it.
   L.readyOrders = function (state) {
@@ -1715,14 +1761,15 @@ var App = (function () {
       h += '<div class="supwrap"><div class="suplbl">Waiting on \u2014 ' +
         sup.length + " thing" + (sup.length === 1 ? "" : "s") +
         (noOrd ? ' \u00b7 <span class="supkey">' + noOrd + " not on order yet</span>" : "") +
-        " \u00b7 tap one to see whose job it holds up</div>" +
+        " \u00b7 tap one to see every job that needs it</div>" +
         '<div class="chips sup">' +
         sup.map(function (r) {
           var late = r.due && r.due < todayISO(t);
           return '<button class="chip supchip' + (supply === r.key ? " on" : "") +
             (r.onOrder ? "" : " noorder") + (late ? " late" : "") +
             '" data-a="supply" data-id="' + esc(r.key) + '" aria-pressed="' + (supply === r.key) + '">' +
-            "<span>" + esc(shortName(r.name)) + "</span><b>" + r.jobs.length + "</b></button>";
+            "<span>" + esc(shortName(r.name)) + "</span><b>" +
+            ((r.queue && r.queue.length) || r.jobs.length) + "</b></button>";
         }).join("") +
         (supply ? '<button class="chip clr" data-a="supply" data-id="">Show all again</button>' : "") +
         "</div></div>";
@@ -1761,7 +1808,7 @@ var App = (function () {
 
     var list = showDone ? S.orders.filter(function (o) { return !L.isAside(S, o); }) : open;
     if (supply) {
-      var picked = L.ordersWaitingOn(S, supply);
+      var picked = L.ordersNeeding(S, supply);
       var sname = "";
       sup.forEach(function (r) { if (r.key === supply) sname = r.name; });
       list = list.filter(function (o) { return picked.indexOf(o) >= 0; });
@@ -2149,15 +2196,34 @@ var App = (function () {
   }
 
   // The line under the board when one supply tab is selected.
+  // Says how the WHOLE pool stands, then names who is actually short, in the
+  // order they queued. "4 jobs, 41 of 48 covered" tells the man far more than
+  // "short 7" ever did - he can see he is one of four on the same shelf.
   function supplyNote(sup, key, name, n) {
     var r = null;
     sup.forEach(function (x) { if (x.key === key) r = x; });
     if (!r) return "";
     var late = r.due && r.due < todayISO(now());
+    var q = r.queue || [];
+    var head = q.length + " job" + (q.length === 1 ? "" : "s") + " on this";
+    if (typeof r.want === "number" && r.want > 0) {
+      head += " \u00b7 " + r.covered + " of " + r.want + " on the shelf";
+    }
+    head += " \u00b7 short " + r.short;
+    var shortOnes = q.filter(function (x) { return x.short > 0; });
+    var who = "";
+    if (shortOnes.length && q.length > 1) {
+      who = "<span>Oldest order gets the stock. " +
+        (shortOnes.length === 1 ? "The one that comes up short is " : "Short: ") +
+        shortOnes.map(function (x) {
+          var who2 = x.order.so || x.order.customer || "an order";
+          if (x.order.so && x.order.customer) who2 += " " + x.order.customer;
+          return esc(who2) + " (short " + x.short + ")";
+        }).join(", ") + ".</span>";
+    }
     return '<div class="supnote' + (r.onOrder ? "" : " bad") + '"><b>' + esc(name) + "</b>" +
-      "<span>short " + r.short + " \u00b7 " + n + " job" + (n === 1 ? "" : "s") +
-      " waiting \u00b7 " + esc(dueText(r)) +
-      (late ? " \u2014 THAT DATE HAS PASSED" : "") + "</span></div>";
+      "<span>" + head + " \u00b7 " + esc(dueText(r)) +
+      (late ? " \u2014 THAT DATE HAS PASSED" : "") + "</span>" + who + "</div>";
   }
   var group = "all";
 
