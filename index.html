@@ -201,15 +201,27 @@ table.tight{min-width:0}
 .suplbl{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink-2);
   margin:0 2px 6px;text-transform:uppercase}
 .supkey{color:var(--alert);font-weight:800}
-/* One swipeable line, not thirteen stacked rows. Thirteen rows of chips
-   would push the board itself off the bottom of a phone. */
-.chips.sup{margin-top:0;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  padding-bottom:4px;scroll-snap-type:x proximity}
-.chips.sup::-webkit-scrollbar{display:none}
-.chips.sup>.chip{flex:0 0 auto;scroll-snap-align:start}
-.chip.supchip{font-size:13px}
+/* WRAPPED, NOT SWIPED - changed 2026-08-27 at Emily's call.
+   The old row scrolled sideways and hid most of the tabs. On a desk mouse
+   there is no swipe and there was no scrollbar, no arrow and no fade edge,
+   so it just looked cut off - and the RED ones (nothing on order) were the
+   ones most likely to be off the right-hand side. A part nobody can see is
+   a part nobody chases. They now wrap onto as many lines as it takes.
+   Tabs are small on purpose so thirteen of them still sit above the fold. */
+.chips.sup{margin-top:0;flex-wrap:wrap;gap:6px}
+.chips.sup>.chip{flex:0 0 auto}
+/* min() is what keeps this honest on both screens: never wider than 230px
+   on a desk monitor, and never more than half a phone - so a phone always
+   gets TWO tabs to a row instead of one long column down the page. */
+.chip.supchip{font-size:12.5px;padding:7px 10px;min-height:36px;
+  flex:0 1 auto;max-width:min(230px,calc(50% - 3px));
+  text-align:left;line-height:1.2}
+.chip.supchip>span{display:block;white-space:normal;overflow-wrap:anywhere}
 .chip.supchip.noorder b{background:var(--alert);color:#fff}
+/* Red chip reads red at arm's length, not just its little badge. Held to
+   the un-pressed state so the green "picked" highlight still wins. */
+.chip.supchip.noorder[aria-pressed="false"]{background:var(--alert-bg);
+  border-color:var(--alert-line)}
 .chip.supchip.late{border-color:var(--alert)}
 .chip.wait b{background:var(--alert);color:#fff}
 .chip.ready b{background:var(--go,#1F6F5C);color:#fff}
@@ -1037,9 +1049,14 @@ var App = (function () {
         if (!r.onOrder && w.onOrder) { r.onOrder = w.onOrder; r.due = w.due; }
       });
     });
-    // The thing holding up the most jobs goes first - that is the one to
-    // chase this morning.
+    // NOT ON A PURCHASE ORDER GOES FIRST (2026-08-27). Something already on
+    // a PO is moving on its own; something with no PO behind it moves only
+    // when a person picks up the phone. Those are the ones to chase this
+    // morning, so they sit top-left. Inside each half, the item holding up
+    // the most jobs leads.
     order.sort(function (a, b) {
+      var an = a.onOrder ? 1 : 0, bn = b.onOrder ? 1 : 0;
+      if (an !== bn) return an - bn;
       if (b.jobs.length !== a.jobs.length) return b.jobs.length - a.jobs.length;
       return String(a.name).toLowerCase() < String(b.name).toLowerCase() ? -1 : 1;
     });
@@ -1691,15 +1708,21 @@ var App = (function () {
     // jobs. This is the "what is stopping us today" row.
     var sup = L.supplies(S);
     if (sup.length) {
-      h += '<div class="supwrap"><div class="suplbl">Waiting on \u2014 swipe across, tap one to see whose job it holds up' +
-        ' <span class="supkey">red = not on order yet</span></div>' +
+      // The header carries the count so nobody has to wonder how many there
+      // are, and calls out the red ones - those are the ones nothing is
+      // moving on.
+      var noOrd = sup.filter(function (r) { return !r.onOrder; }).length;
+      h += '<div class="supwrap"><div class="suplbl">Waiting on \u2014 ' +
+        sup.length + " thing" + (sup.length === 1 ? "" : "s") +
+        (noOrd ? ' \u00b7 <span class="supkey">' + noOrd + " not on order yet</span>" : "") +
+        " \u00b7 tap one to see whose job it holds up</div>" +
         '<div class="chips sup">' +
         sup.map(function (r) {
           var late = r.due && r.due < todayISO(t);
           return '<button class="chip supchip' + (supply === r.key ? " on" : "") +
             (r.onOrder ? "" : " noorder") + (late ? " late" : "") +
             '" data-a="supply" data-id="' + esc(r.key) + '" aria-pressed="' + (supply === r.key) + '">' +
-            esc(shortName(r.name)) + "<b>" + r.jobs.length + "</b></button>";
+            "<span>" + esc(shortName(r.name)) + "</span><b>" + r.jobs.length + "</b></button>";
         }).join("") +
         (supply ? '<button class="chip clr" data-a="supply" data-id="">Show all again</button>' : "") +
         "</div></div>";
@@ -2112,8 +2135,10 @@ var App = (function () {
   // front of it, which is the part that identifies the thing.
   function shortName(n) {
     n = String(n || "").replace(/\s+/g, " ").trim();
-    if (n.length <= 26) return n;
-    var cut = n.slice(0, 26);
+    // Was 26 while the tabs sat on one sideways-scrolling line. They wrap
+    // now, so a name gets room to be readable instead of "...".
+    if (n.length <= 44) return n;
+    var cut = n.slice(0, 44);
     var sp = cut.lastIndexOf(" ");
     if (sp > 14) cut = cut.slice(0, sp);
     return cut + "\u2026";
