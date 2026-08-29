@@ -1516,6 +1516,71 @@ var App = (function () {
       .catch(function () { return false; });
   }
 
+
+  /* ---------- orders from the brain ----------
+     The store also serves the order list (?what=orders), rebuilt from
+     inFlow every few minutes by the "main brain" script. We fold it in
+     without touching manual cards, tracker jobs, or anybody's running
+     punch. An empty or refused feed changes nothing.
+     ------------------------------------------------------------------ */
+  function adoptOrders(list) {
+    if (!list || !list.length) return false;
+    var s = clone(S);
+    var byInf = {}, running = {}, soIn = {}, seen = {};
+    s.orders.forEach(function (o) { if (o.inflowId) byInf[o.inflowId] = o; });
+    s.entries.forEach(function (e) { if (!e.stop) running[e.orderId] = 1; });
+    list.forEach(function (n) { if (n.so) soIn[String(n.so).toUpperCase()] = 1; });
+    var fresh = [];
+    list.forEach(function (n) {
+      if (!n.inflowId) return;
+      // Derek's rule: nothing on the picklist, stays off the board.
+      if ((!n.lines || !n.lines.length) && n.status !== "done") return;
+      seen[n.inflowId] = 1;
+      var old = byInf[n.inflowId];
+      fresh.push({
+        id: old ? old.id : uid("o"),
+        inflowId: n.inflowId,
+        so: n.so || "", customer: n.customer || "", note: n.note || "",
+        status: (n.status === "done" || (old && old.status === "done")) ? "done" : "open",
+        createdAt: old ? old.createdAt : now(),
+        orderDate: n.orderDate || null,
+        tier: n.tier || "", scheme: n.scheme || "",
+        hasKit: !!n.hasKit, hasLabor: !!n.hasLabor,
+        lines: n.lines || [], dupOf: n.dupOf || []
+      });
+    });
+    s.orders.forEach(function (o) {
+      if (!o.inflowId) {
+        // Hand-added card the feed now covers: the feed copy wins,
+        // unless a punch is running on this one right now.
+        if (o.so && soIn[String(o.so).toUpperCase()] && !running[o.id]) return;
+        fresh.push(o); return;
+      }
+      // Gone from the feed (cancelled, finished long ago, or aged out):
+      // keep it only while somebody is on the clock on it.
+      if (!seen[o.inflowId] && running[o.id]) fresh.push(o);
+    });
+    var before = JSON.stringify(s.orders) === JSON.stringify(S.orders) ? null : 1;
+    if (JSON.stringify(fresh) === JSON.stringify(S.orders)) return false;
+    s.orders = fresh;
+    S = s; cacheLocally(S);
+    return true;
+  }
+
+  function pullOrders() {
+    if (store.mode !== "server") return Promise.resolve(false);
+    return fetch(BACKEND + "?what=orders", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok || !d.orders || !d.orders.length) return false;
+        if (d.syncedAt && d.syncedAt === store.lastOrdersSync) return false;
+        var changed = adoptOrders(d.orders);
+        store.lastOrdersSync = d.syncedAt || store.lastOrdersSync;
+        return changed;
+      })
+      .catch(function () { return false; });
+  }
+
   // Send again. What this device is holding is already inside S, so the job is
   // simply to get S onto the shared copy. We only clear the held punches once
   // the send actually succeeded — never before.
@@ -2662,6 +2727,7 @@ var App = (function () {
       render();
       if (pendingCount()) flushPending().then(function () { render(); });
       else pullState().then(function (changed) { if (changed) render(); });
+      pullOrders().then(function (changed) { if (changed && !sheet) render(); });
     });
     window.addEventListener("online", function () {
       if (pendingCount()) flushPending().then(function () { render(); });
@@ -2674,6 +2740,12 @@ var App = (function () {
       if (pendingCount() || sheet) return;          // never yank a sheet out from under a thumb
       pullState().then(function (changed) { if (changed) render(); });
     }, 30000);
+    // Orders come from the shop's own store now - check on open, then every minute.
+    pullOrders().then(function (changed) { if (changed) render(); });
+    setInterval(function () {
+      if (sheet) return;
+      pullOrders().then(function (changed) { if (changed) render(); });
+    }, 60000);
   }
 
   // Any punch this device made that is not in the saved data goes back on.
@@ -2683,6 +2755,8 @@ var App = (function () {
     start: start,
     L: L,
     _state: function () { return S; },
+    _adoptOrders: function (l) { var c = adoptOrders(l); if (c) render(); return c; },
+    _pullOrders: pullOrders,
     _setState: function (s) { S = s; render(); },
     _setMe: function (id) { setMe(id); render(); },
     _tab: function (k) { tab = k; render(); },
