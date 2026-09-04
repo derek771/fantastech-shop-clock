@@ -431,16 +431,21 @@ var App = (function () {
   // Start a worker on an order. If that worker is already running
   // something else, close it at the SAME instant this one opens —
   // no gap, no overlap, no double-counting.
-  L.clockIn = function (state, workerId, orderId, now, forceId) {
+  L.clockIn = function (state, workerId, orderId, now, forceId, who) {
     var s = clone(state);
     if (!L.findOrder(s, orderId)) return s;
     var cur = L.activeEntry(s, workerId);
     if (cur && cur.orderId === orderId) return s;          // double-tap = no-op
     if (cur) cur.stop = now;
-    s.entries.push({
+    var e = {
       id: forceId || uid("e"), orderId: orderId, workerId: workerId,
       start: now, stop: null, edited: false
-    });
+    };
+    // The name rides on the punch. A phone that never heard of this person
+    // (added on another phone, or dropped from the list) can still say who.
+    if (!who) who = L.workerName(s, workerId);
+    if (who && who !== "?") e.who = who;
+    s.entries.push(e);
     return s;
   };
 
@@ -463,6 +468,10 @@ var App = (function () {
   };
   L.workerName = function (state, workerId) {
     for (var i = 0; i < state.workers.length; i++) if (state.workers[i].id === workerId) return state.workers[i].name;
+    // Not on this phone's list - take the name off their newest punch.
+    for (var j = state.entries.length - 1; j >= 0; j--) {
+      if (state.entries[j].workerId === workerId && state.entries[j].who) return state.entries[j].who;
+    }
     return "?";
   };
 
@@ -537,8 +546,11 @@ var App = (function () {
       m[w.id] = { worker: w, ms: 0, punches: 0 };
     });
     state.entries.forEach(function (e) {
-      if (!m[e.workerId]) m[e.workerId] = { worker: { id: e.workerId, name: "(removed)" },
-                                            ms: 0, punches: 0 };
+      if (!m[e.workerId]) {
+        var nm = L.workerName(state, e.workerId);
+        m[e.workerId] = { worker: { id: e.workerId, name: nm === "?" ? "(removed)" : nm },
+                          ms: 0, punches: 0 };
+      }
       m[e.workerId].ms += L.elapsed(e, now);
       m[e.workerId].punches++;
     });
@@ -1206,7 +1218,7 @@ var App = (function () {
   L.applyOp = function (state, op) {
     if (op.kind === "in") {
       if (L.findEntry(state, op.entryId)) return state;         // already saved
-      return L.clockIn(state, op.workerId, op.orderId, op.at, op.entryId);
+      return L.clockIn(state, op.workerId, op.orderId, op.at, op.entryId, op.who);
     }
     if (op.kind === "out") {
       var e = L.findEntry(state, op.entryId);
@@ -1317,6 +1329,15 @@ var App = (function () {
       if (cached.aside && typeof cached.aside === "object") base.aside = cached.aside;
       if (cached.holds && typeof cached.holds === "object") base.holds = cached.holds;
       if (typeof cached.__version === "number") store.version = cached.__version;
+      // Names added on THIS phone come back. Names the page itself dropped
+      // (no local mark) stay dropped - the page's list is the shop's list.
+      if (Array.isArray(cached.workers)) {
+        var have = {};
+        base.workers.forEach(function (w) { have[w.id] = 1; });
+        cached.workers.forEach(function (w) {
+          if (w && w.local && w.id && w.name && !have[w.id]) { base.workers.push(w); have[w.id] = 1; }
+        });
+      }
     }
     return migrate(base);
   }
@@ -1325,7 +1346,8 @@ var App = (function () {
     try {
       localStorage.setItem(LOCAL, JSON.stringify({
         entries: state.entries, picks: state.picks, aside: state.aside,
-        holds: state.holds, __version: store.version
+        holds: state.holds, __version: store.version,
+        workers: state.workers.filter(function (w) { return !!w.local; })
       }));
     } catch (x) {}
   }
@@ -1533,6 +1555,8 @@ var App = (function () {
     var fresh = [];
     list.forEach(function (n) {
       if (!n.inflowId) return;
+      // A quote (SQ-) is not an order. Nobody pulls stock for it.
+      if (/^SQ-/i.test(String(n.so || ""))) return;
       // Derek's rule: nothing on the picklist, stays off the board.
       if ((!n.lines || !n.lines.length) && n.status !== "done") return;
       seen[n.inflowId] = 1;
@@ -2467,7 +2491,9 @@ var App = (function () {
         var n = d.querySelector("#f_w").value.trim();
         if (!n) { toast("Type a name first.", true); return; }
         var s = clone(S), id = uid("w");
-        s.workers.push({ id: id, name: n });
+        // local: this phone keeps the name itself. The store carries punches,
+        // not the crew list, so without this the name is gone on reload.
+        s.workers.push({ id: id, name: n, local: true });
         closeSheet();
         save(s).then(function () { setMe(id); });
         me = id; render();
@@ -2579,7 +2605,7 @@ var App = (function () {
         if (a === "cancel") return closeSheet();
         var next = JSON.parse(JSON.stringify(S));
         var n = d.querySelector("#f_new").value.trim();
-        if (n) next.workers.push({ id: uid("w"), name: n });
+        if (n) next.workers.push({ id: uid("w"), name: n, local: true });
         var lg = parseFloat(d.querySelector("#f_long").value);
         if (isNaN(lg) || lg < 1) { toast("Flag hours has to be at least 1.", true); return; }
         next.settings.longRunHours = lg;
@@ -2634,7 +2660,8 @@ var App = (function () {
     var eid = uid("e");
     var next = L.clockIn(S, me, orderId, t, eid);
     if (next === S || !L.findEntry(next, eid)) { render(); return; }
-    var op = { id: uid("op"), kind: "in", entryId: eid, workerId: me, orderId: orderId, at: t };
+    var op = { id: uid("op"), kind: "in", entryId: eid, workerId: me, orderId: orderId, at: t,
+               who: L.workerName(S, me) };
     if (prev) op.closes = prev.id;
     save(next, op);
     render();
