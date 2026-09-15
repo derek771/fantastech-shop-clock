@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fantastech Office Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F3F1; --panel:#FFFFFF; --panel-2:#F7F9F7;
+    --ink:#141A18; --ink-soft:#5A6662; --line:#D7DEDA;
+    --accent:#10403A; --on-accent:#FFFFFF;
+    --ok:#2C7A4C; --warn:#A96A09; --info:#2A6AA0; --idle:#6E7873;
+    --shadow:0 1px 2px rgba(20,26,24,.07), 0 6px 16px rgba(20,26,24,.04);
+    --radius:8px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#111615; --panel:#1A211E; --panel-2:#212926;
+      --ink:#E8EEEB; --ink-soft:#9AA7A1; --line:#2B3531;
+      --accent:#79CFB5; --on-accent:#101514;
+      --ok:#5CBE85; --warn:#DFA544; --info:#6FB0E0; --idle:#8A948F;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 16px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111615; --panel:#1A211E; --panel-2:#212926;
+    --ink:#E8EEEB; --ink-soft:#9AA7A1; --line:#2B3531;
+    --accent:#79CFB5; --on-accent:#101514;
+    --ok:#5CBE85; --warn:#DFA544; --info:#6FB0E0; --idle:#8A948F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 16px rgba(0,0,0,.25);
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding-inline:16px; padding-block:26px 48px;}
+  .eyebrow{
+    font-family:"Archivo", system-ui, sans-serif; font-weight:600; font-size:12px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 6px;
+  }
+  h1{
+    font-family:"Archivo", system-ui, sans-serif; font-weight:700;
+    font-size:clamp(26px,5vw,34px); line-height:1.1; margin:0; text-wrap:balance;
+  }
+  .headline-row{display:flex; flex-wrap:wrap; gap:12px 20px; align-items:flex-end; justify-content:space-between;}
+  .count{
+    font-family:"Archivo", system-ui, sans-serif; font-weight:600; font-size:15px;
+    color:var(--ink-soft); font-variant-numeric:tabular-nums;
+  }
+  .count b{color:var(--ok); font-size:22px;}
+  .hint{margin:14px 0 0; font-size:14px; color:var(--ink-soft);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(255px,1fr)); gap:12px; margin-top:20px;}
+  .tile{
+    all:unset; box-sizing:border-box; cursor:pointer; display:block;
+    background:var(--panel); border:1px solid var(--line); border-left:6px solid var(--idle);
+    border-radius:var(--radius); padding:14px 16px; box-shadow:var(--shadow);
+    transition:transform .08s ease, border-color .15s ease;
+  }
+  .tile:hover{transform:translateY(-1px);}
+  .tile:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  .tile .nm{font-family:"Archivo", system-ui, sans-serif; font-weight:700; font-size:20px; line-height:1.2;}
+  .tile .st{display:flex; align-items:center; gap:7px; margin-top:6px; font-size:15px; font-weight:500;}
+  .dot{width:10px; height:10px; border-radius:50%; background:var(--idle); flex:none;}
+  .tile .meta{margin-top:5px; font-size:13px; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .tile .note{
+    margin-top:7px; font-size:14px; color:var(--ink); background:var(--panel-2);
+    border-radius:5px; padding:6px 8px; overflow-wrap:anywhere;
+  }
+  .s-here{--c:var(--ok)} .s-phone{--c:var(--warn)} .s-job{--c:var(--info)}
+  .s-out{--c:var(--idle)} .s-lunch{--c:var(--warn)} .s-gone{--c:var(--idle)}
+  .tile[data-s]{border-left-color:var(--c);}
+  .tile[data-s] .dot{background:var(--c);}
+  .tile[data-s] .st{color:var(--c);}
+  .addrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px;}
+  input[type=text]{
+    font:inherit; font-size:15px; color:var(--ink); background:var(--panel);
+    border:1px solid var(--line); border-radius:6px; padding:9px 11px; min-width:0; flex:1 1 180px;
+  }
+  input[type=text]:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  .btn{
+    all:unset; box-sizing:border-box; cursor:pointer; font-family:"Archivo", system-ui, sans-serif;
+    font-weight:600; font-size:15px; padding:10px 16px; border-radius:6px;
+    background:var(--accent); color:var(--on-accent); text-align:center;
+  }
+  .btn.ghost{background:transparent; color:var(--ink-soft); border:1px solid var(--line);}
+  .btn:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  .sheet-bg{
+    position:fixed; inset:0; background:rgba(12,18,16,.45); display:flex;
+    align-items:center; justify-content:center; padding:16px; z-index:20;
+  }
+  .sheet{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    box-shadow:0 20px 50px rgba(0,0,0,.28); width:100%; max-width:430px;
+    max-height:90vh; overflow-y:auto; padding:20px;
+  }
+  .sheet h2{font-family:"Archivo", system-ui, sans-serif; font-size:23px; margin:0 0 2px;}
+  .sheet .sub{font-size:13px; color:var(--ink-soft); margin:0 0 16px;}
+  .lbl{
+    display:block; font-family:"Archivo", system-ui, sans-serif; font-weight:600; font-size:12px;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin:16px 0 7px;
+  }
+  .opts{display:grid; gap:7px;}
+  .opt{
+    all:unset; box-sizing:border-box; cursor:pointer; display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line); border-radius:6px; padding:11px 13px; font-size:16px; font-weight:500;
+  }
+  .opt .dot{width:12px; height:12px; background:var(--c, var(--idle));}
+  .opt[aria-pressed="true"]{border-color:var(--c); border-width:2px; padding:10px 12px; background:var(--panel-2);}
+  .opt:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  .sheet-actions{display:flex; gap:8px; margin-top:20px;}
+  .sheet-actions .btn{flex:1;}
+  .rm{
+    all:unset; cursor:pointer; display:block; margin-top:14px; font-size:13px;
+    color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px;
+  }
+  .msg{
+    margin-top:20px; padding:14px 16px; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--panel); color:var(--ink-soft); font-size:15px;
+  }
+
+  /* Narrow window = status strip. Park it on the side of the screen. */
+  @media (max-width: 420px){
+    .wrap{padding-block:12px 16px; padding-inline:12px;}
+    .eyebrow{display:none;}
+    h1{font-size:19px;}
+    .hint, .addrow{display:none;}
+    .headline-row{gap:4px 10px;}
+    .count b{font-size:18px;}
+    .grid{grid-template-columns:1fr; gap:6px; margin-top:12px;}
+    .tile{padding:8px 10px; border-left-width:5px; box-shadow:none;}
+    .tile .nm{font-size:15px;}
+    .tile .st{font-size:13px; margin-top:2px; gap:6px;}
+    .tile .meta{font-size:11px; margin-top:2px;}
+    .tile .note{font-size:12px; padding:4px 6px; margin-top:4px;}
+    .dot{width:8px; height:8px;}
+    .msg{font-size:13px; padding:10px 12px; margin-top:12px;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <p class="eyebrow">Fantastech &middot; Goshen</p>
+  <div class="headline-row">
+    <h1>Who's around right now</h1>
+    <div class="count" id="count">&nbsp;</div>
+  </div>
+  <p class="hint">Tap your own name to set where you're at. Anybody can set anybody &mdash; if Derek walks out, whoever knows it can mark him out.</p>
+
+  <div class="grid" id="grid"></div>
+  <div class="msg" id="msg" hidden></div>
+
+  <div class="addrow">
+    <input type="text" id="newname" placeholder="Add a name" autocomplete="off">
+    <button class="btn ghost" id="addbtn" type="button">Add</button>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetbg" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetname">
+    <h2 id="sheetname">Name</h2>
+    <p class="sub" id="sheetsub">&nbsp;</p>
+    <span class="lbl">Where they are at</span>
+    <div class="opts" id="opts"></div>
+    <label class="lbl" for="backat">Back at (leave blank if not sure)</label>
+    <input type="text" id="backat" placeholder="1:30, after lunch, Thursday" autocomplete="off">
+    <label class="lbl" for="note">Short note (leave blank if none)</label>
+    <input type="text" id="note" placeholder="At the Lehman dairy" autocomplete="off">
+    <div class="sheet-actions">
+      <button class="btn" id="save" type="button">Save</button>
+      <button class="btn ghost" id="cancel" type="button">Cancel</button>
+    </div>
+    <button class="rm" id="remove" type="button">Remove this person from the board</button>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  // Paste the Apps Script web app address between the quotes:
+  var API = "PUT_THE_SCRIPT_ADDRESS_HERE";
+
+  var STATUSES = [
+    {k:"here",  label:"In the office",     cls:"s-here"},
+    {k:"phone", label:"On the phone",      cls:"s-phone"},
+    {k:"job",   label:"Out on a job",      cls:"s-job"},
+    {k:"out",   label:"Out of the office", cls:"s-out"},
+    {k:"lunch", label:"At lunch",          cls:"s-lunch"},
+    {k:"gone",  label:"Gone for the day",  cls:"s-gone"}
+  ];
+  function stat(k){
+    for(var i=0;i<STATUSES.length;i++){ if(STATUSES[i].k===k) return STATUSES[i]; }
+    return {k:"out", label:"Not set", cls:"s-out"};
+  }
+
+  var grid=document.getElementById("grid"), msg=document.getElementById("msg"),
+      countEl=document.getElementById("count"), sheetbg=document.getElementById("sheetbg"),
+      optsEl=document.getElementById("opts");
+  var rows=[], openId=null, pick="here", removeArmed=false, busy=false;
+
+  function say(t){ msg.hidden=!t; msg.textContent=t||""; }
+
+  function clockTime(iso){
+    if(!iso) return "";
+    var d=new Date(iso); if(isNaN(d.getTime())) return "";
+    try{ return d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",timeZone:"America/Indianapolis"}); }
+    catch(e){ return d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}); }
+  }
+  function sameDay(iso){
+    if(!iso) return false;
+    var d=new Date(iso), n=new Date();
+    return d.getFullYear()===n.getFullYear() && d.getMonth()===n.getMonth() && d.getDate()===n.getDate();
+  }
+
+  function render(){
+    grid.textContent="";
+    var here=0;
+    rows.forEach(function(r){
+      if(r.status==="here"||r.status==="phone") here++;
+      var s=stat(r.status);
+      var b=document.createElement("button");
+      b.type="button"; b.className="tile "+s.cls; b.setAttribute("data-s",s.k);
+      var nm=document.createElement("div"); nm.className="nm"; nm.textContent=r.name;
+      var st=document.createElement("div"); st.className="st";
+      var dot=document.createElement("span"); dot.className="dot";
+      var lab=document.createElement("span"); lab.textContent=s.label;
+      st.appendChild(dot); st.appendChild(lab);
+      b.appendChild(nm); b.appendChild(st);
+      var bits=[];
+      if(r.since) bits.push((sameDay(r.since)?"Since ":"")+clockTime(r.since));
+      if(r.backAt) bits.push("Back at "+r.backAt);
+      if(bits.length){ var m=document.createElement("div"); m.className="meta"; m.textContent=bits.join("  ·  "); b.appendChild(m); }
+      if(r.note){ var n=document.createElement("div"); n.className="note"; n.textContent=r.note; b.appendChild(n); }
+      b.addEventListener("click", function(){ openSheet(r.id); });
+      grid.appendChild(b);
+    });
+    countEl.innerHTML = rows.length ? "<b>"+here+"</b> of "+rows.length+" here" : "&nbsp;";
+    try{
+      document.title = rows.length ? here+" of "+rows.length+" here — Office Board" : "Fantastech Office Board";
+    }catch(e){}
+    if(rows.length===0) say("Nobody on the board yet. Add a name below to start.");
+    else say("");
+  }
+
+  function buildOpts(){
+    optsEl.textContent="";
+    STATUSES.forEach(function(s){
+      var b=document.createElement("button");
+      b.type="button"; b.className="opt "+s.cls;
+      b.setAttribute("aria-pressed", String(s.k===pick));
+      var dot=document.createElement("span"); dot.className="dot";
+      var lab=document.createElement("span"); lab.textContent=s.label;
+      b.appendChild(dot); b.appendChild(lab);
+      b.addEventListener("click", function(){ pick=s.k; buildOpts(); });
+      optsEl.appendChild(b);
+    });
+  }
+
+  function rowById(id){ for(var i=0;i<rows.length;i++){ if(rows[i].id===id) return rows[i]; } return null; }
+
+  function openSheet(id){
+    var r=rowById(id); if(!r) return;
+    openId=id; pick=r.status||"here"; removeArmed=false;
+    document.getElementById("sheetname").textContent=r.name;
+    document.getElementById("sheetsub").textContent=r.since?("Set "+clockTime(r.since)):"Not set yet today";
+    document.getElementById("backat").value=r.backAt||"";
+    document.getElementById("note").value=r.note||"";
+    document.getElementById("remove").textContent="Remove this person from the board";
+    buildOpts(); sheetbg.hidden=false; document.getElementById("save").focus();
+  }
+  function closeSheet(){ sheetbg.hidden=true; openId=null; }
+
+  document.getElementById("cancel").addEventListener("click", closeSheet);
+  sheetbg.addEventListener("click", function(e){ if(e.target===sheetbg) closeSheet(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !sheetbg.hidden) closeSheet(); });
+
+  function call(params){
+    if(API.indexOf("PUT_THE_SCRIPT") === 0){
+      say("This board is not hooked up yet — the script address is still missing.");
+      busy=false; return;
+    }
+    var q=[];
+    for(var k in params){ if(params[k]!=null) q.push(encodeURIComponent(k)+"="+encodeURIComponent(params[k])); }
+    fetch(API+"?"+q.join("&"))
+      .then(function(res){ return res.json(); })
+      .then(function(data){ busy=false; rows=(data&&data.rows)||[]; render(); })
+      .catch(function(){ busy=false; say("Couldn't reach the board. It keeps trying."); });
+  }
+
+  document.getElementById("save").addEventListener("click", function(){
+    if(!openId) return;
+    var id=openId,
+        backAt=document.getElementById("backat").value,
+        note=document.getElementById("note").value,
+        chosen=pick;
+    closeSheet(); busy=true;
+    call({action:"set", id:id, status:chosen, backAt:backAt, note:note});
+  });
+
+  document.getElementById("remove").addEventListener("click", function(){
+    var btn=this;
+    if(!removeArmed){ removeArmed=true; btn.textContent="Tap again to remove for good"; return; }
+    if(!openId) return;
+    var id=openId; closeSheet(); busy=true;
+    call({action:"remove", id:id});
+  });
+
+  function addPerson(){
+    var inp=document.getElementById("newname"), name=inp.value.trim();
+    if(!name) return;
+    inp.value=""; busy=true;
+    call({action:"add", name:name});
+  }
+  document.getElementById("addbtn").addEventListener("click", addPerson);
+  document.getElementById("newname").addEventListener("keydown", function(e){ if(e.key==="Enter") addPerson(); });
+
+  function refresh(){ if(busy || !sheetbg.hidden) return; call({}); }
+
+  say("Loading the board…");
+  call({});
+  setInterval(refresh, 10000);
+})();
+</script>
+
+</body>
+</html>
