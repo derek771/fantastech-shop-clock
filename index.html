@@ -1339,6 +1339,14 @@ var App = (function () {
         });
       }
     }
+    // 2026-09-15: the inFlow orders baked into this page stopped being refreshed on
+    // 2026-08-28 (the board pulls them live from the store now), so they are weeks
+    // stale. Never show them. Keep only hand-added cards and jobs from the page,
+    // lay this device's last LIVE order list on top, and let the feed fill the rest.
+    var handCards = (base.orders || []).filter(function (o) { return o && !o.inflowId; });
+    var lastLive = (cached && Array.isArray(cached.orders))
+      ? cached.orders.filter(function (o) { return o && o.inflowId; }) : [];
+    base.orders = handCards.concat(lastLive);
     return migrate(base);
   }
 
@@ -1347,6 +1355,7 @@ var App = (function () {
       localStorage.setItem(LOCAL, JSON.stringify({
         entries: state.entries, picks: state.picks, aside: state.aside,
         holds: state.holds, __version: store.version,
+        orders: (state.orders || []).filter(function (o) { return o && o.inflowId; }),
         workers: state.workers.filter(function (w) { return !!w.local; })
       }));
     } catch (x) {}
