@@ -74,6 +74,7 @@
   }
   .s-here{--c:var(--ok)} .s-phone{--c:var(--warn)} .s-job{--c:var(--info)}
   .s-out{--c:var(--idle)} .s-lunch{--c:var(--warn)} .s-gone{--c:var(--idle)}
+  .s-meeting{--c:var(--warn)}
   .tile[data-s]{border-left-color:var(--c);}
   .tile[data-s] .dot{background:var(--c);}
   .tile[data-s] .st{color:var(--c);}
@@ -192,6 +193,7 @@
     {k:"here",  label:"In the office",     cls:"s-here"},
     {k:"phone", label:"On the phone",      cls:"s-phone"},
     {k:"job",   label:"Out on a job",      cls:"s-job"},
+    {k:"meeting",label:"In a meeting",     cls:"s-meeting"},
     {k:"out",   label:"Out of the office", cls:"s-out"},
     {k:"lunch", label:"At lunch",          cls:"s-lunch"},
     {k:"gone",  label:"Gone for the day",  cls:"s-gone"}
@@ -224,7 +226,7 @@
     grid.textContent="";
     var here=0;
     rows.forEach(function(r){
-      if(r.status==="here"||r.status==="phone") here++;
+      if(r.status==="here"||r.status==="phone"||r.status==="meeting") here++;
       var s=stat(r.status);
       var b=document.createElement("button");
       b.type="button"; b.className="tile "+s.cls; b.setAttribute("data-s",s.k);
