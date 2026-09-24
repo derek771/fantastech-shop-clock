@@ -112,6 +112,7 @@ button:focus-visible,[tabindex]:focus-visible,input:focus-visible,select:focus-v
 .cmain{flex:1 1 240px;min-width:0}
 .so{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px;font-weight:600;letter-spacing:-.01em}
 .cust{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-top:1px;overflow-wrap:anywhere}
+.contact{font-size:13.5px;font-weight:600;color:var(--ink-2);margin-top:1px;overflow-wrap:anywhere}
 .note{font-size:13px;color:var(--ink-2);margin-top:4px;overflow-wrap:anywhere;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px;align-items:baseline}
@@ -665,11 +666,40 @@ var App = (function () {
   // Returns { score 0..100, literal } — literal means the words were really
   // in there, not a spelling guess. That is what decides whether we show the
   // result plainly or say "no exact match, closest is...".
+  // The people behind an order (inFlow's contact on the order and on the
+  // customer record). The crew may know the man, not the company:
+  // "James Weaver" is Homestead Structures. Derek, 2026-09-24.
+  L.contactsOf = function (o) {
+    var own = L.norm(o && o.customer), seen = {}, out = [];
+    String((o && o.contact) || "").split(/[,;]/).forEach(function (n) {
+      n = n.trim();
+      var k = L.norm(n);
+      if (!k || seen[k] || k === own) return;
+      seen[k] = 1; out.push(n);
+    });
+    return out;
+  };
+
+  // Search by EITHER name. Each name is scored on its own (so an exact
+  // company hit still ranks exactly as it always did), and once more with
+  // everything together, so "james homestead" lands too. Best one wins.
   L.score = function (state, o, rawQuery) {
+    var people = L.contactsOf(o);
+    var best = L.scoreName(o, rawQuery, o.customer);
+    if (!people.length) return best;
+    var names = people.concat([[o.customer].concat(people).join(" ")]);
+    names.forEach(function (n) {
+      var r = L.scoreName(o, rawQuery, n);
+      if (r.score > best.score || (r.score === best.score && r.literal && !best.literal)) best = r;
+    });
+    return best;
+  };
+
+  L.scoreName = function (o, rawQuery, name) {
     var q = L.norm(rawQuery);
     if (!q) return { score: 0, literal: false };
 
-    var cust = L.norm(o.customer);
+    var cust = L.norm(name);
     var custNS = cust.replace(/ /g, "");
     var so = L.norm(o.so), note = L.norm(o.note);
     var qNS = q.replace(/ /g, "");
@@ -783,6 +813,7 @@ var App = (function () {
           id: uid("o"), inflowId: inc.inflowId,
           so: String(inc.so || "").trim(),
           customer: String(inc.customer || "").trim(),
+          contact: String(inc.contact || "").trim(),
           note: L.scrubNote(inc.note),
           status: "open", createdAt: now,
           orderDate: inc.orderDate || null,
@@ -800,6 +831,7 @@ var App = (function () {
       // refresh the label from inFlow, but never stomp a note somebody typed here
       if (inc.so && ex.so !== inc.so) { ex.so = inc.so; updated++; }
       if (inc.customer && ex.customer !== inc.customer) { ex.customer = inc.customer; updated++; }
+      if (typeof inc.contact === "string" && (ex.contact || "") !== inc.contact.trim()) { ex.contact = inc.contact.trim(); updated++; }
       if (inc.orderDate) ex.orderDate = inc.orderDate;
       // tier and Kit come from inFlow every time — they can change there
       if (inc.tier) ex.tier = inc.tier === "wholesale" ? "wholesale" : "retail";
@@ -1573,7 +1605,7 @@ var App = (function () {
       fresh.push({
         id: old ? old.id : uid("o"),
         inflowId: n.inflowId,
-        so: n.so || "", customer: n.customer || "", note: n.note || "",
+        so: n.so || "", customer: n.customer || "", contact: n.contact || "", note: n.note || "",
         status: (n.status === "done" || (old && old.status === "done")) ? "done" : "open",
         createdAt: old ? old.createdAt : now(),
         orderDate: n.orderDate || null,
@@ -1836,7 +1868,7 @@ var App = (function () {
     var counts = L.groupCounts(S);
     h += '<div class="tools"><div class="srch"><span class="mag">⌕</span>' +
       '<input id="q" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" ' +
-      'placeholder="Search a customer or SO number" value="' + esc(query) + '">' +
+      'placeholder="Search a name, company or SO number" value="' + esc(query) + '">' +
       (query ? '<button class="clr" data-a="clearq" aria-label="Clear the search">✕</button>' : "") +
       "</div>";
     h += '<div class="chips">' + L.GROUPS.map(function (gr) {
@@ -1990,6 +2022,7 @@ var App = (function () {
       "</div>" +
       (o.so ? '<div class="so">' + esc(o.so) + "</div>" : "") +
       '<div class="cust">' + esc(o.customer || "(no name)") + "</div>" +
+      (L.contactsOf(o).length ? '<div class="contact">' + esc(L.contactsOf(o).join(", ")) + "</div>" : "") +
       (av ? '<div class="asideby">Taken off the board by ' +
             esc(L.workerName(S, av.by) || "somebody") + " \u00b7 " + esc(L.clockText(av.at)) +
             ". Still on " + esc(L.homeOf(o)) + ".</div>" : "") +
@@ -2060,7 +2093,8 @@ var App = (function () {
 
     var h = '<div class="pl-head"><h1>PICK LIST &nbsp;&middot;&nbsp; ' +
       esc(o.so || "(no number)") + "</h1>" +
-      '<div class="cust">' + esc(o.customer || "(no name)") + "</div></div>" +
+      '<div class="cust">' + esc(o.customer || "(no name)") +
+      (L.contactsOf(o).length ? " (" + esc(L.contactsOf(o).join(", ")) + ")" : "") + "</div></div>" +
       '<div class="pl-sub">' +
       lines.length + " line" + (lines.length === 1 ? "" : "s") +
       (c.done ? " &nbsp;&middot;&nbsp; " + c.done + " already ticked off on a phone" : "") +
